@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Layout from './layout';
+import Pages from './pages';
+import Messages from './containers/Messages';
+
+const App = () => {
+  
+	document.title = 'Vintage Burger';
+	const bagLength = useSelector( state =>  state.shoppingBag.products ).length;
+
+	return (
+		<Layout bagLength={ bagLength } >
+
+			<Pages />
+
+			<Messages />
+
+		</Layout>
+	);
 }
 
 export default App;
