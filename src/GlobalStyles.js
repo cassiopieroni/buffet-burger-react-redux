@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import burgerImg from './assets/img-burger.jpg';
+import { createGlobalStyle } from "styled-components"
+import burgerImg from "./assets/img-burger.jpg"
 
 export default createGlobalStyle`
 
@@ -81,4 +81,4 @@ export default createGlobalStyle`
         font-family: 'Anton';
         src: url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
     }
-`;
+`

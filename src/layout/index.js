@@ -1,15 +1,14 @@
-import React from 'react';
-import Header from './Header';
-import Content from './Content';
-import Footer from './Footer';
+import React from "react"
+import Header from "./Header"
+import Content from "./Content"
+import Footer from "./Footer"
 
 export default ({ children, bagLength }) => (
-    
-    <>
-        <Header bagLength={bagLength} />
+	<>
+		<Header bagLength={bagLength} />
 
-        <Content>{ children }</Content>
-        
-        <Footer />
-    </>
+		<Content>{children}</Content>
+
+		<Footer />
+	</>
 )

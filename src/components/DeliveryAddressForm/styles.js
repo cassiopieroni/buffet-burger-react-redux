@@ -1,21 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const StyledDiv = styled.div`
-    width: 100%;
+	width: 100%;
 
-    div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        @media (max-width: 830px) {
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-            input:first-child {
-                width: 280px;
-            }
-            input:last-child {
-                width: 200px;
-            }
-        }
-    }
-`;
+		@media (max-width: 830px) {
+			input:first-child {
+				width: 280px;
+			}
+			input:last-child {
+				width: 200px;
+			}
+		}
+	}
+`

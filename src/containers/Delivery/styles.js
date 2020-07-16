@@ -1,67 +1,66 @@
-import styled from 'styled-components';
-import { StyledSections, StyledButtons } from '../../components/SharedStyles';
+import styled from "styled-components"
+import { StyledSections, StyledButtons } from "../../components/SharedStyles"
 
 export const StyledSection = styled(StyledSections)`
-    width: 800px;
-    min-height: 300px;
-    margin: 25px auto 100px;
-    padding-bottom: 50px;
-`;
+	width: 800px;
+	min-height: 300px;
+	margin: 25px auto 100px;
+	padding-bottom: 50px;
+`
 
 export const StyledForm = styled.form`
-    width: 95%;
-    margin: 25px auto;
+	width: 95%;
+	margin: 25px auto;
 
-    input {
-        border: 1px solid #f1f1f1;
-        border-radius: 3px;
-        height: 35px;
-        box-sizing: border-box;
-        padding: 3px 10px;
-        margin: 5px 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-        background-color: #012840;
-        color: #ffffff;
+	input {
+		border: 1px solid #f1f1f1;
+		border-radius: 3px;
+		height: 35px;
+		box-sizing: border-box;
+		padding: 3px 10px;
+		margin: 5px 10px;
+		font-weight: bold;
+		text-transform: uppercase;
+		background-color: #012840;
+		color: #ffffff;
 
-        &::placeholder {
-            color: lightgray;
-            text-transform: lowercase;
-        }
-    }
-`;
+		&::placeholder {
+			color: lightgray;
+			text-transform: lowercase;
+		}
+	}
+`
 
 export const StyledDiv = styled.div`
+	margin: 20px auto;
+	color: #f4f4f4;
+	font-style: italic;
 
-    margin: 20px auto;
-    color: #f4f4f4;
-    font-style: italic;
+	p {
+		text-align: center;
+		margin: 10px;
+	}
 
-    p {
-        text-align: center;
-        margin: 10px;
-    }
+	span {
+		margin-left: 10px;
+	}
 
-    span {
-        margin-left: 10px;
-    }
+	p:last-child {
+		font-weight: bold;
 
-    p:last-child {
-        font-weight: bold;
-
-        span {
-            color: #F25252;
-            font-size: 1.1rem;
-        }
-    }
-`;
+		span {
+			color: #f25252;
+			font-size: 1.1rem;
+		}
+	}
+`
 
 export const StyledButton = styled(StyledButtons)`
-    @media(max-width: 830px) {
-        width: 320px;
-        text-align: start;
-        p {
-            margin-left: 30px;
-        }
-    }
-`;
+	@media (max-width: 830px) {
+		width: 320px;
+		text-align: start;
+		p {
+			margin-left: 30px;
+		}
+	}
+`

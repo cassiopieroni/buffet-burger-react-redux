@@ -1,9 +1,4 @@
-import React from 'react';
-import { StyledMain } from './styles';
+import React from "react"
+import { StyledMain } from "./styles"
 
-export default ({ children }) => (
-
-    <StyledMain>
-        { children }
-    </StyledMain>
-);
+export default ({ children }) => <StyledMain>{children}</StyledMain>
