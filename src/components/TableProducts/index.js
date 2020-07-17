@@ -1,24 +1,24 @@
 import React from "react"
 
-import TableTrProducts from "../TableTrProducts"
+import TrProduct from "./TrProduct"
 import NumToReal from "../NumToReal"
 
-import { StyledTable, StyledThDescription, StyledThQtd, StyledThValues } from "./styles"
+import { StyledTable, StyledTh } from "./styles"
 
 const TableProducts = ({ products, bagPrice, changeProduct }) => (
 	<StyledTable>
 		<thead>
 			<tr>
-				<StyledThDescription>Descrição</StyledThDescription>
-				<StyledThQtd>Qtd</StyledThQtd>
-				<StyledThValues>Valor unitário</StyledThValues>
-				<StyledThValues>Valor total</StyledThValues>
+				<StyledTh width={50}>Descrição</StyledTh>
+				<StyledTh width={20}>Qtd</StyledTh>
+				<StyledTh width={15}>Valor unitário</StyledTh>
+				<StyledTh width={15}>Valor total</StyledTh>
 			</tr>
 		</thead>
 
 		<tbody>
 			{products.map(product => (
-				<TableTrProducts
+				<TrProduct
 					key={product.id}
 					product={product}
 					changeProduct={changeProduct}

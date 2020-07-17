@@ -1,5 +1,7 @@
 export const createNewDish = payload => ({
-	description: payload.dishItems.map(item => item.description).join(", "),
+	description: payload.dishItems
+		.map(item => item.overviewDescription || item.description)
+		.join(", "),
 	unitPrice: payload.dishPrice,
 	quantity: 1,
 	subtotal: payload.dishPrice,

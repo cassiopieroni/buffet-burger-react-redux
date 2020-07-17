@@ -11,10 +11,9 @@ import {
 import { addMessage } from "../../store/ducks/messages"
 
 import TableProducts from "../../components/TableProducts"
+import Button from "../../components/Button"
 
-import { StyledSection, StyledDiv, StyledButton, StyledDivEmpty } from "./styles"
-import burgerIcon from "../../assets/burger-45x45-white.png"
-import confirmIcon from "../../assets/confirm-45x45.png"
+import { StyledSection, StyledDiv, StyledDivEmpty } from "./styles"
 
 export default () => {
 	const dispatch = useDispatch()
@@ -57,19 +56,16 @@ export default () => {
 
 					<StyledDiv>
 						<NavLink to={"/buffet"}>
-							<StyledButton>
-								<img src={burgerIcon} alt="hamburger" />
-								<p>Comprar mais items</p>
-							</StyledButton>
+							<Button iconType="burger">comprar mais itens</Button>
 						</NavLink>
 
 						<NavLink to={"/delivery"}>
-							<StyledButton
-								onClick={() => dispatch(confirmProductsOnBag())}
+							<Button
+								iconType="confirm"
+								clicked={() => dispatch(confirmProductsOnBag())}
 							>
-								<img src={confirmIcon} alt="confirmar" />
-								<p>confirmar produtos</p>
-							</StyledButton>
+								confirmar produtos
+							</Button>
 						</NavLink>
 					</StyledDiv>
 				</>

@@ -6,4 +6,10 @@ export const StyledSection = styled(StyledSectionsBg)`
 	box-sizing: border-box;
 	margin: 15px 5px;
 	padding: 20px 25px;
+
+	h2 {
+		text-align: center;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
 `

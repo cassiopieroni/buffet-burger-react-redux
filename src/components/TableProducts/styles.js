@@ -33,14 +33,8 @@ export const StyledTable = styled.table`
 	}
 `
 
-export const StyledThDescription = styled.th`
-	width: 50%;
-`
-
-export const StyledThQtd = styled.th`
-	width: 20%;
-`
-
-export const StyledThValues = styled.th`
-	width: 15%;
+export const StyledTh = styled.th`
+	width: ${props => props.width}%;
+	height: 30px;
+	line-height: 30px;
 `

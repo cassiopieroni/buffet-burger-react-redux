@@ -1,17 +1,9 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
+import DishItem from "./DishItem"
 import NumToReal from "../NumToReal"
-import { StyledSection, StyledP1, StyledP2, StyledButton } from "./styles"
-import cartIcon from "../../assets/bag-50x50.png"
-
-const DishItem = ({ item }) => (
-	<li>
-		<p>{item.description}</p>
-		<span>
-			<NumToReal num={item.price} />
-		</span>
-	</li>
-)
+import Button from "../Button"
+import { StyledSection, StyledP1, StyledP2 } from "./styles"
 
 const DishOverview = ({ dishSummary, subtotal, handleClick, productsLength }) => (
 	<StyledSection>
@@ -27,22 +19,18 @@ const DishOverview = ({ dishSummary, subtotal, handleClick, productsLength }) =>
 					</ul>
 
 					<StyledP1>
-						Total:{" "}
-						<span>
-							<NumToReal num={subtotal} />
-						</span>
+						Total: <NumToReal num={subtotal} />
 					</StyledP1>
 				</>
 			) : (
 				<StyledP2>Selecione seus ingredientes!</StyledP2>
 			)}
 
-			<StyledButton onClick={handleClick}>
-				<img src={cartIcon} alt="carrinho" />
-				<p>adicionar</p>
-			</StyledButton>
+			<Button iconType="shoppingBag" clicked={handleClick}>
+				adicionar
+			</Button>
 
-			<NavLink to="/shopping-bag">sacola de compras ( {productsLength} )</NavLink>
+			<NavLink to="/shopping-bag">{`sacola de compras ( ${productsLength} )`}</NavLink>
 		</div>
 	</StyledSection>
 )

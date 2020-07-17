@@ -1,8 +1,6 @@
 import React from "react"
 
-import SelectionOfMainItems from "../SelectionOfMainItems"
-import SelectionOfExtraItems from "../SelectionOfExtraItems"
-import SelectionOfMeatSpot from "../SelectionOfMeatSpot"
+import SelectionOfItems from "./SelectionOfItems"
 
 import { StyledSection } from "./styles"
 
@@ -13,30 +11,48 @@ const BuffetItems = props => {
 
 	return (
 		<StyledSection>
-			<SelectionOfMainItems
+			<h2>Selecione seus itens:</h2>
+
+			<SelectionOfItems
+				title={"Pão"}
+				keyName={"allBreads"}
 				changeItem={changeItem}
-				mainItems={{
-					allBreads,
-					allBurgers,
-					allCheeses,
-				}}
-				currentItemsOnDish={{
-					bread,
-					burger,
-					cheese,
-				}}
+				allItems={allBreads}
+				currentCheckedItem={bread}
 			/>
 
-			<SelectionOfMeatSpot
+			<SelectionOfItems
+				title={"Hamburguer"}
+				keyName={"allBurgers"}
 				changeItem={changeItem}
-				allMeatSpots={allMeatSpots}
-				currentCheckedMeatSpot={meatSpot}
+				allItems={allBurgers}
+				currentCheckedItem={burger}
 			/>
 
-			<SelectionOfExtraItems
-				toggleExtraItem={toggleExtraItem}
-				allExtras={allExtras}
-				currentItemsOnDish={extras}
+			<SelectionOfItems
+				title={"Ponto do Hamburger"}
+				keyName={"allMeatSpots"}
+				changeItem={changeItem}
+				allItems={allMeatSpots}
+				currentCheckedItem={meatSpot}
+			/>
+
+			<SelectionOfItems
+				title={"Queijo"}
+				keyName={"allCheeses"}
+				changeItem={changeItem}
+				allItems={allCheeses}
+				currentCheckedItem={cheese}
+				isOptional
+			/>
+
+			<SelectionOfItems
+				title={"Adicione"}
+				keyName={"allExtras"}
+				changeItem={toggleExtraItem}
+				allItems={allExtras}
+				currentCheckedItem={extras}
+				isOptional
 			/>
 		</StyledSection>
 	)
