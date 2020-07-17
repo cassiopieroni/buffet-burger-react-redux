@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components"
-import burgerImg from "./assets/img-burger.jpg"
+import burgerImg from "../assets/img-burger.jpg"
 
 export default createGlobalStyle`
 

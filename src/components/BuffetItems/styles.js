@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { StyledSectionsBg } from "../SharedStyles"
+import { StyledSectionsBg } from "../../styles/sharedStyles"
 
 export const StyledSection = styled(StyledSectionsBg)`
 	width: 550px;

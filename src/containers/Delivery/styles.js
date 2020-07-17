@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { StyledSections, StyledButtons } from "../../components/SharedStyles"
+import { StyledSections, StyledButtons } from "../../styles/sharedStyles"
 
 export const StyledSection = styled(StyledSections)`
 	width: 800px;
@@ -51,16 +51,6 @@ export const StyledDiv = styled.div`
 		span {
 			color: #f25252;
 			font-size: 1.1rem;
-		}
-	}
-`
-
-export const StyledButton = styled(StyledButtons)`
-	@media (max-width: 830px) {
-		width: 320px;
-		text-align: start;
-		p {
-			margin-left: 30px;
 		}
 	}
 `

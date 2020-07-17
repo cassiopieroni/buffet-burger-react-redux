@@ -2,7 +2,7 @@ import React from "react"
 
 import { StyledDiv } from "./styles"
 
-const DeliveryAddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
+const AddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 	const {
 		clientName,
 		cep,
@@ -117,4 +117,4 @@ const DeliveryAddressForm = ({ fetchingAddress, changeAddress, addressForm }) =>
 	)
 }
 
-export default DeliveryAddressForm
+export default AddressForm

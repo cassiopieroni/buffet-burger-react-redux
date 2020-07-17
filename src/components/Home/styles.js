@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { StyledButtons } from "../SharedStyles"
+import { StyledButtons } from "../../styles/sharedStyles"
 
 export const StyledDiv = styled.div`
 	position: absolute;

@@ -2,7 +2,7 @@ import React from "react"
 
 import { StyledDiv, StyledInput } from "./styles"
 
-const DeliveryPaymentForm = ({ paymentForm, changePayment }) => {
+const PaymentForm = ({ paymentForm, changePayment }) => {
 	const methods = ["cartão de débito", "cartão de crédito", "dinheiro"]
 
 	return (
@@ -39,4 +39,4 @@ const DeliveryPaymentForm = ({ paymentForm, changePayment }) => {
 	)
 }
 
-export default DeliveryPaymentForm
+export default PaymentForm

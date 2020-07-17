@@ -15,21 +15,18 @@ import { clearShoppingBag } from "../../store/ducks/shoppingBag"
 
 import { fetchAddress } from "../../store/fetchActions"
 
-import TableProductsSlideAnimation from "../../components/TableProductsSlideAnimation"
-import DeliveryAddressForm from "../../components/DeliveryAddressForm"
-import DeliveryPaymentForm from "../../components/DeliveryPaymentForm"
+import AddressForm from "../../components/DeliveryForm/AddressForm"
+import PaymentForm from "../../components/DeliveryForm/PaymentForm"
 import NumToReal from "../../components/NumToReal"
+import Button from "../../components/Button"
 
-import { StyledSection, StyledForm, StyledDiv, StyledButton } from "./styles"
-import confirmIcon from "../../assets/confirm-45x45.png"
+import { StyledSection, StyledForm, StyledDiv } from "./styles"
 
 const Delivery = props => {
 	const dispatch = useDispatch()
 
 	const { isConfirmedBag, products, bagPrice } = useSelector(state => state.shoppingBag)
-	const { form, isValidCep, deliveryFee, isFetchingData } = useSelector(
-		state => state.delivery
-	)
+	const { form, isValidCep, deliveryFee } = useSelector(state => state.delivery)
 
 	const handleOnBlurFetchAddress = () => {
 		const cep = form.address.cep.replace(/\D/g, "")
@@ -91,10 +88,8 @@ const Delivery = props => {
 		<StyledSection>
 			<h2>Dados de entrega</h2>
 
-			<TableProductsSlideAnimation products={products} bagPrice={bagPrice} />
-
 			<StyledForm onSubmit={handleClickSubmit}>
-				<DeliveryAddressForm
+				<AddressForm
 					fetchingAddress={handleOnBlurFetchAddress}
 					changeAddress={handleChangeAddress}
 					addressForm={form.address}
@@ -116,15 +111,14 @@ const Delivery = props => {
 					</p>
 				</StyledDiv>
 
-				<DeliveryPaymentForm
+				<PaymentForm
 					paymentForm={form.payment}
 					changePayment={handleChangePayment}
 				/>
 
-				<StyledButton type="submit" disabled={isFetchingData}>
-					<img src={confirmIcon} alt="confirmar" />
-					<p>Confirmar dados e enviar pedido</p>
-				</StyledButton>
+				<Button iconType="confirm" buttonType="submit">
+					Confirmar dados de entrega
+				</Button>
 			</StyledForm>
 		</StyledSection>
 	)
