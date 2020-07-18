@@ -1,10 +1,4 @@
-export const validatingDish = dish => {
-	const requiredItems = [
-		{ type: "bread", errorMessage: "Selecione o pão" },
-		{ type: "burger", errorMessage: "Selecione o hamburguer" },
-		{ type: "meatSpot", errorMessage: "Selecione o ponto do hamburguer" },
-	]
-
+export const validatingDish = (dish, requiredItems) => {
 	const isSelected = requiredItem =>
 		dish.some(item => item.type === requiredItem && item.value !== "empty")
 

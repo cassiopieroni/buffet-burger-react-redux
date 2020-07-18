@@ -1,15 +1,17 @@
 import { createReducer, createAction } from "@reduxjs/toolkit"
-import { buffetData } from "./buffetData"
-import { getDishPrice, getSummaryItems, getNewExtraItems } from "./helpers"
+import buffetData from "../../../data/buffetData"
+import requiredItems from "../../../data/requiredItems"
+import { getDishPrice, getSummaryItems } from "./helpers"
 
 const INITIAL_STATE = {
 	buffetData,
+	requiredItems,
 	dish: {
 		currentSelectedItems: {
-			bread: { value: "empty" },
-			burger: { value: "empty" },
-			cheese: { value: "empty" },
-			meatSpot: { value: "empty" },
+			bread: { value: "" },
+			burger: { value: "" },
+			cheese: { value: "" },
+			meatSpot: { value: "" },
 			extras: [],
 		},
 		summaryItems: [],
@@ -17,25 +19,29 @@ const INITIAL_STATE = {
 	},
 }
 
-export const changeDishItem = createAction("CHANGE_ITEM")
-export const toggleDishExtraItem = createAction("TOGGLE_EXTRA_ITEM")
+export const toggleDishItem = createAction("TOGGLE_ITEM")
+export const toggleExtraItem = createAction("TOGGLE_EXTRA_ITEM")
+export const addExtraItem = createAction("ADD_EXTRA_ITEM")
+export const removeExtraItem = createAction("REMOVE_EXTRA_ITEM")
 export const clearDish = createAction("CLEAR_DISH")
 
 export default createReducer(INITIAL_STATE, {
-	[changeDishItem.type]: (state, action) => {
-		const { name, value } = action.payload
-		const selectedItem = state.buffetData[name].find(item => item.value === value)
+	[toggleDishItem.type]: (state, action) => {
+		const clickedItem = action.payload
+		const prevSelectedItem = state.dish.currentSelectedItems[clickedItem.type]
+
+		const isAlmostSelected = clickedItem.value === prevSelectedItem.value
 
 		const newCurrentSelectedItems = {
 			...state.dish.currentSelectedItems,
-			[selectedItem.type]: selectedItem,
+			[clickedItem.type]: isAlmostSelected ? { value: "" } : clickedItem,
 		}
-
 		const newSummaryItems = getSummaryItems(newCurrentSelectedItems)
 
 		return {
 			...state,
 			dish: {
+				...state.dish,
 				currentSelectedItems: newCurrentSelectedItems,
 				summaryItems: newSummaryItems,
 				subtotal: getDishPrice(newSummaryItems),
@@ -43,15 +49,15 @@ export default createReducer(INITIAL_STATE, {
 		}
 	},
 
-	[toggleDishExtraItem.type]: (state, action) => {
+	[toggleExtraItem.type]: (state, action) => {
+		const clickedItem = action.payload
+		const prevExtras = state.dish.currentSelectedItems.extras
 		const newCurrentSelectedItems = {
 			...state.dish.currentSelectedItems,
-			extras: getNewExtraItems(
-				state.dish.currentSelectedItems.extras,
-				action.payload
-			),
+			extras: prevExtras.some(prev => prev.value === clickedItem.value)
+				? prevExtras.filter(prev => prev.value !== clickedItem.value)
+				: [...prevExtras, clickedItem],
 		}
-
 		const newSummaryItems = getSummaryItems(newCurrentSelectedItems)
 
 		return {

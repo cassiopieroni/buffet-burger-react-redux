@@ -7,13 +7,13 @@ const ChangeableTd = ({ product, changeProduct }) => (
 	<td>
 		<StyledDiv>
 			<button onClick={() => changeProduct("decrease", product)}>
-				<img src={decBtn} />
+				<img src={decBtn} alt="diminuir" />
 			</button>
 
 			<span>{product.quantity}</span>
 
 			<button onClick={() => changeProduct("increase", product)}>
-				<img src={addBtn} />
+				<img src={addBtn} alt="aumentar" />
 			</button>
 		</StyledDiv>
 

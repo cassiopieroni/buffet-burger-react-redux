@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit"
-import { createNewDish, decreasingQuantity, increasingQuantity } from "./helpers"
+import { decreasingQuantity, increasingQuantity } from "./helpers"
 
 const INITIAL_STATE = {
 	products: [],
@@ -16,12 +16,22 @@ export const clearShoppingBag = createAction("CLEAR_SHOPPING_BAG")
 
 export default createReducer(INITIAL_STATE, {
 	[addProductToBag.type]: (state, action) => {
-		const newDish = createNewDish(action.payload)
+		const { payload } = action
+
+		const newBagProduct = {
+			description: payload.dishItems
+				.map(item => item.overviewDescription || item.description)
+				.join(", "),
+			unitPrice: payload.dishPrice,
+			quantity: 1,
+			subtotal: payload.dishPrice,
+			id: Math.floor(Math.random() * 10000),
+		}
 
 		return {
 			...state,
-			products: [...state.products, { ...newDish }],
-			bagPrice: state.bagPrice + newDish.subtotal,
+			products: [...state.products, { ...newBagProduct }],
+			bagPrice: state.bagPrice + newBagProduct.subtotal,
 			isConfirmedBag: false,
 		}
 	},

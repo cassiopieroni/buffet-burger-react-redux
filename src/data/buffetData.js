@@ -1,4 +1,4 @@
-export const buffetData = {
+const buffetData = {
 	allMeatSpots: [
 		{
 			type: "meatSpot",
@@ -15,7 +15,6 @@ export const buffetData = {
 	],
 
 	allBreads: [
-		//{ value: "empty", type: "bread", selectDescription: "*selecione o pão" },
 		{
 			type: "bread",
 			value: "integral",
@@ -31,7 +30,6 @@ export const buffetData = {
 	],
 
 	allBurgers: [
-		//{ value: "empty", type: "burger", selectDescription: "*selecione o hamburger" },
 		{
 			type: "burger",
 			value: "carne90",
@@ -63,7 +61,6 @@ export const buffetData = {
 	],
 
 	allCheeses: [
-		//{ value: "empty", type: "cheese", selectDescription: "selecione o queijo" },
 		{
 			type: "cheese",
 			value: "cheddar",
@@ -104,3 +101,5 @@ export const buffetData = {
 		},
 	],
 }
+
+export default buffetData

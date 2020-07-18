@@ -7,7 +7,7 @@ export default () => (
 	<StyledDiv>
 		<NavLink to="/buffet">
 			<StyledButton>
-				<img src={burgerIcon} />
+				<img src={burgerIcon} alt="hamburger" />
 				<p>Sirva-se aqui</p>
 			</StyledButton>
 		</NavLink>

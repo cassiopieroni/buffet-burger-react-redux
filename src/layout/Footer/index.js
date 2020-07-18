@@ -9,13 +9,18 @@ export default () => (
 		<div>
 			<p>
 				{`fontes:  `}
-				<a href="https://icons8.com.br/icons" target="_blank">
+				<a
+					href="https://icons8.com.br/icons"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					ícones
 				</a>
 				{`  /  `}
 				<a
 					href="https://www.pexels.com/pt-br/foto/alface-alimento-almoco-cheeseburger-1639562/"
 					target="_blank"
+					rel="noopener noreferrer"
 				>
 					imagem
 				</a>

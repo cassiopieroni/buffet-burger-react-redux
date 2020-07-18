@@ -2,19 +2,20 @@ import React from "react"
 import { StyledLi } from "./styles"
 import NumToReal from "../../../NumToReal"
 
-const Item = ({ item, changeItem, curCheckedItem, name }) => {
-	const isChecked = curCheckedItem.value === item.value
+const Item = ({ item, clickedOnItem, curCheckedItem }) => {
+	const isExtraItem = item.type === "extra"
+	const isChecked = isExtraItem
+		? curCheckedItem.some(extra => extra.value === item.value)
+		: curCheckedItem.value === item.value
 
 	return (
 		<StyledLi isChecked={isChecked}>
 			<label>
 				<input
-					name={name}
-					type="radio"
+					type={isExtraItem ? "checkbox" : "radio"}
 					value={item.value}
-					checked={isChecked}
-					onChange={changeItem}
-					required
+					defaultChecked={isChecked}
+					onClick={() => clickedOnItem(item)}
 				/>
 
 				<p>{item.description}</p>

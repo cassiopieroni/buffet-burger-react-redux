@@ -1,11 +1,15 @@
 import React from "react"
-
 import SelectionOfItems from "./SelectionOfItems"
-
 import { StyledSection } from "./styles"
 
 const BuffetItems = props => {
-	const { changeItem, toggleExtraItem, buffetData, currentSelectedItems } = props
+	const {
+		toggleItem,
+		toggleExtraItem,
+		buffetData,
+		currentSelectedItems,
+		requiredItems,
+	} = props
 	const { allBreads, allBurgers, allCheeses, allExtras, allMeatSpots } = buffetData
 	const { bread, burger, cheese, extras, meatSpot } = currentSelectedItems
 
@@ -15,44 +19,44 @@ const BuffetItems = props => {
 
 			<SelectionOfItems
 				title={"Pão"}
-				keyName={"allBreads"}
-				changeItem={changeItem}
+				clickedOnItem={toggleItem}
 				allItems={allBreads}
 				currentCheckedItem={bread}
+				isOptional={!requiredItems.some(item => item.type === allBreads[0].type)}
 			/>
 
 			<SelectionOfItems
-				title={"Hamburguer"}
-				keyName={"allBurgers"}
-				changeItem={changeItem}
+				title={"Hamburger"}
+				clickedOnItem={toggleItem}
 				allItems={allBurgers}
 				currentCheckedItem={burger}
+				isOptional={!requiredItems.some(item => item.type === allBurgers[0].type)}
 			/>
 
 			<SelectionOfItems
-				title={"Ponto do Hamburger"}
-				keyName={"allMeatSpots"}
-				changeItem={changeItem}
+				title={"Ponto do hamburguer"}
+				clickedOnItem={toggleItem}
 				allItems={allMeatSpots}
 				currentCheckedItem={meatSpot}
+				isOptional={
+					!requiredItems.some(item => item.type === allMeatSpots[0].type)
+				}
 			/>
 
 			<SelectionOfItems
 				title={"Queijo"}
-				keyName={"allCheeses"}
-				changeItem={changeItem}
+				clickedOnItem={toggleItem}
 				allItems={allCheeses}
 				currentCheckedItem={cheese}
-				isOptional
+				isOptional={!requiredItems.some(item => item.type === allCheeses[0].type)}
 			/>
 
 			<SelectionOfItems
 				title={"Adicione"}
-				keyName={"allExtras"}
-				changeItem={toggleExtraItem}
+				clickedOnItem={toggleExtraItem}
 				allItems={allExtras}
 				currentCheckedItem={extras}
-				isOptional
+				isOptional={!requiredItems.some(item => item.type === allExtras[0].type)}
 			/>
 		</StyledSection>
 	)
