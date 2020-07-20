@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { toggleDishItem, toggleExtraItem, clearDish } from "../../store/ducks/buffet"
@@ -18,22 +18,26 @@ export default () => {
 	const { buffetData, requiredItems, dish } = useSelector(state => state.buffet)
 	const productsLength = useSelector(state => state.shoppingBag.products.length)
 
-	const handleToggleItem = clickedItem => dispatch(toggleDishItem(clickedItem))
+	const { summaryItems, subtotal, selectedItems } = dish
 
-	const handleToggleExtraItem = clickedExtraItem =>
-		dispatch(toggleExtraItem(clickedExtraItem))
+	const handleToggleItem = useCallback(
+		clickedItem => dispatch(toggleDishItem(clickedItem)),
+		[]
+	)
 
-	const handleClickAddDishToBag = () => {
-		const { isValid, errorMessages } = validatingDish(
-			dish.summaryItems,
-			requiredItems
-		)
+	const handleToggleExtraItem = useCallback(
+		clickedExtraItem => dispatch(toggleExtraItem(clickedExtraItem)),
+		[]
+	)
+
+	const handleClickAddDishToBag = useCallback(() => {
+		const { isValid, errorMessages } = validatingDish(summaryItems, requiredItems)
 
 		if (isValid) {
 			dispatch(
 				addProductToBag({
-					dishItems: dish.summaryItems,
-					dishPrice: dish.subtotal,
+					dishItems: summaryItems,
+					dishPrice: subtotal,
 				})
 			)
 			dispatch(
@@ -48,7 +52,7 @@ export default () => {
 				dispatch(addMessage({ type: "error", content: msg }))
 			)
 		}
-	}
+	}, [summaryItems, requiredItems])
 
 	return (
 		<StyledDiv>
@@ -56,13 +60,13 @@ export default () => {
 				toggleItem={handleToggleItem}
 				toggleExtraItem={handleToggleExtraItem}
 				buffetData={buffetData}
-				currentSelectedItems={dish.currentSelectedItems}
+				selectedItems={selectedItems}
 				requiredItems={requiredItems}
 			/>
 
 			<DishOverview
-				dishSummary={dish.summaryItems}
-				subtotal={dish.subtotal}
+				dishSummary={summaryItems}
+				subtotal={subtotal}
 				handleClick={handleClickAddDishToBag}
 				productsLength={productsLength}
 			/>

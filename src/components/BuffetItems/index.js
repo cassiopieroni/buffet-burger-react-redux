@@ -7,11 +7,11 @@ const BuffetItems = props => {
 		toggleItem,
 		toggleExtraItem,
 		buffetData,
-		currentSelectedItems,
+		selectedItems,
 		requiredItems,
 	} = props
 	const { allBreads, allBurgers, allCheeses, allExtras, allMeatSpots } = buffetData
-	const { bread, burger, cheese, extras, meatSpot } = currentSelectedItems
+	const { bread, burger, cheese, extras, meatSpot } = selectedItems
 
 	return (
 		<StyledSection>
