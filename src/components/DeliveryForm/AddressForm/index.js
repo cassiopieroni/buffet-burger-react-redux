@@ -34,7 +34,7 @@ const AddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					maxLength={9}
 					size="15"
 					required
-					maxlength="9"
+					maxLength="9"
 					value={cep}
 					onBlur={fetchingAddress}
 					onChange={changeAddress}
@@ -82,8 +82,8 @@ const AddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					type="text"
 					id="uf"
 					size="5"
-					maxlength="2"
-					minlength="2"
+					maxLength="2"
+					minLength="2"
 					required
 					value={uf}
 					onChange={changeAddress}

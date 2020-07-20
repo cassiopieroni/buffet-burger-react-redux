@@ -18,8 +18,9 @@ const INITIAL_STATE = {
 		},
 	},
 	isValidCep: false,
-	isFetchingData: false,
+	//isFetchingData: false,
 	deliveryFee: 0,
+	confirmedDelivery: false,
 }
 
 export const changeAddressValue = createAction("CHANGE_ADDRESS_VALUE")
@@ -27,7 +28,8 @@ export const clearAddressFields = createAction("CLEAR_ADDRESS_FIELDS")
 export const waitingFetchAddress = createAction("WAITING_FETCH_ADDRESS")
 export const updateAddressWithFetchedData = createAction("UPDATE_ADDRESS")
 export const changePayment = createAction("CHANGE_PAYMENT")
-export const clearAddress = createAction("CLEAR_ADDRESS")
+export const clearDelivery = createAction("CLEAR_DELIVERY")
+export const confirmDelivery = createAction("CONFIRM_DELIVERY")
 
 export default createReducer(INITIAL_STATE, {
 	[changeAddressValue.type]: (state, action) => ({
@@ -39,6 +41,7 @@ export default createReducer(INITIAL_STATE, {
 				[action.payload.name]: action.payload.value,
 			},
 		},
+		confirmedDelivery: false,
 	}),
 
 	[clearAddressFields.type]: state => ({
@@ -52,8 +55,9 @@ export default createReducer(INITIAL_STATE, {
 			},
 		},
 		isValidCep: false,
-		isFetchingData: false,
+		//isFetchingData: false,
 		deliveryFee: 0,
+		confirmedDelivery: false,
 	}),
 
 	[waitingFetchAddress.type]: state => ({
@@ -71,7 +75,8 @@ export default createReducer(INITIAL_STATE, {
 			},
 		},
 		isValidCep: false,
-		isFetchingData: true,
+		confirmedDelivery: false,
+		//isFetchingData: true,
 	}),
 
 	[updateAddressWithFetchedData.type]: (state, action) => ({
@@ -87,8 +92,9 @@ export default createReducer(INITIAL_STATE, {
 			},
 		},
 		isValidCep: true,
-		isFetchingData: false,
+		//isFetchingData: false,
 		deliveryFee: 7,
+		confirmedDelivery: false,
 	}),
 
 	[changePayment.type]: (state, action) => ({
@@ -100,9 +106,15 @@ export default createReducer(INITIAL_STATE, {
 				[action.payload.name]: action.payload.value,
 			},
 		},
+		confirmedDelivery: false,
 	}),
 
-	[clearAddress.type]: () => ({
+	[clearDelivery.type]: () => ({
 		...INITIAL_STATE,
+	}),
+
+	[confirmDelivery.type]: state => ({
+		...state,
+		confirmedDelivery: true,
 	}),
 })

@@ -5,7 +5,7 @@ import Home from "../components/Home"
 import Buffet from "../containers/Buffet"
 import ShoppingBag from "../containers/ShoppingBag"
 import Delivery from "../containers/Delivery"
-import OrderConfirmed from "../containers/OrderConfirmed"
+import Order from "../containers/Order"
 import NotFoundPage from "../components/NotFoundPage"
 
 export default () => (
@@ -14,7 +14,7 @@ export default () => (
 		<Route path="/buffet" component={Buffet} />
 		<Route path="/shopping-bag" component={ShoppingBag} />
 		<Route path="/delivery" component={Delivery} />
-		<Route path="/order" component={OrderConfirmed} />
+		<Route path="/order" component={Order} />
 		<Route component={NotFoundPage} />
 	</Switch>
 )

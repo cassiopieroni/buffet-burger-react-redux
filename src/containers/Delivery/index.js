@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect } from "react-router-dom"
 
@@ -8,10 +8,9 @@ import {
 	clearAddressFields,
 	waitingFetchAddress,
 	changePayment,
-	clearAddress,
+	confirmDelivery,
 } from "../../store/ducks/delivery"
-import { addNewConfirmedOrder } from "../../store/ducks/confirmedOrders"
-import { clearShoppingBag } from "../../store/ducks/shoppingBag"
+import { addNewOrder } from "../../store/ducks/orders"
 
 import { fetchAddress } from "../../store/fetchActions"
 
@@ -28,14 +27,16 @@ const Delivery = props => {
 	const { isConfirmedBag, products, bagPrice } = useSelector(state => state.shoppingBag)
 	const { form, isValidCep, deliveryFee } = useSelector(state => state.delivery)
 
-	const handleOnBlurFetchAddress = () => {
-		const cep = form.address.cep.replace(/\D/g, "")
+	const { cep } = form.address
+
+	const handleOnBlurFetchAddress = useCallback(() => {
+		const regExpCEP = cep.replace(/\D/g, "")
 		const validateCep = /^[0-9]{8}$/
 
-		if (cep !== "") {
-			if (validateCep.test(cep)) {
+		if (regExpCEP !== "") {
+			if (validateCep.test(regExpCEP)) {
 				dispatch(waitingFetchAddress())
-				dispatch(fetchAddress(cep))
+				dispatch(fetchAddress(regExpCEP))
 			} else {
 				dispatch(addMessage({ type: "error", content: "CEP inválido" }))
 				dispatch(clearAddressFields())
@@ -43,35 +44,40 @@ const Delivery = props => {
 		} else {
 			dispatch(clearAddressFields())
 		}
-	}
+	}, [dispatch, cep])
 
-	const handleChangeAddress = e => {
-		const { name, value } = e.target
-		dispatch(changeAddressValue({ name, value }))
-	}
+	const handleChangeAddress = useCallback(
+		e => {
+			const { name, value } = e.target
+			dispatch(changeAddressValue({ name, value }))
+		},
+		[dispatch]
+	)
 
-	const handleChangePayment = e => {
-		const { name, value } = e.target
-		dispatch(changePayment({ name, value }))
-	}
+	const handleChangePayment = useCallback(
+		e => {
+			const { name, value } = e.target
+			dispatch(changePayment({ name, value }))
+		},
+		[dispatch]
+	)
 
 	const handleClickSubmit = e => {
 		e.preventDefault()
 
 		if (isValidCep) {
 			const orderData = { products, bagPrice, form, deliveryFee }
-			confirmingOrder(orderData)
+			confirmingDeliveryData(orderData)
 			props.history.push("/order")
 		} else {
 			dispatch(addMessage({ type: "error", content: "CEP não encontrado!" }))
 		}
 	}
 
-	const confirmingOrder = order => {
-		dispatch(addNewConfirmedOrder(order))
-		dispatch(addMessage({ type: "success", content: "pedido confirmado!" }))
-		dispatch(clearShoppingBag())
-		dispatch(clearAddress())
+	const confirmingDeliveryData = order => {
+		dispatch(confirmDelivery())
+		dispatch(addNewOrder(order))
+		dispatch(addMessage({ type: "success", content: "endereço confirmado!" }))
 	}
 
 	if (!isConfirmedBag) {
