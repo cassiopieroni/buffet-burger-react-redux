@@ -31,8 +31,7 @@ const TableProducts = ({ products, bagPrice, changeProduct }) => (
 				<tr>
 					<th colSpan={3}>total em produtos</th>
 					<td>
-						{" "}
-						<NumToReal num={bagPrice} />{" "}
+						<NumToReal num={bagPrice} />
 					</td>
 				</tr>
 			</tfoot>

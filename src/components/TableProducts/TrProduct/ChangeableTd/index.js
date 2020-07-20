@@ -1,23 +1,27 @@
 import React from "react"
-import { StyledDiv } from "./styles"
+import * as changeTypes from "../../../../store/ducks/shoppingBag/constants"
+import { StyledDiv, StyledBtn } from "./styles"
 import decBtn from "../../../../assets/dec-30x30.png"
 import addBtn from "../../../../assets/add-30x30.png"
 
 const ChangeableTd = ({ product, changeProduct }) => (
 	<td>
 		<StyledDiv>
-			<button onClick={() => changeProduct("decrease", product)}>
+			<StyledBtn
+				onClick={() => changeProduct(changeTypes.decrease, product)}
+				disabled={product.quantity <= 1}
+			>
 				<img src={decBtn} alt="diminuir" />
-			</button>
+			</StyledBtn>
 
 			<span>{product.quantity}</span>
 
-			<button onClick={() => changeProduct("increase", product)}>
+			<StyledBtn onClick={() => changeProduct(changeTypes.increase, product)}>
 				<img src={addBtn} alt="aumentar" />
-			</button>
+			</StyledBtn>
 		</StyledDiv>
 
-		<p onClick={() => changeProduct("delete", product)}>excluir</p>
+		<p onClick={() => changeProduct(changeTypes.deletePr, product)}>excluir</p>
 	</td>
 )
 

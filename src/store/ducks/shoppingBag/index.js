@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit"
-import { decreasingQuantity, increasingQuantity } from "./helpers"
+import { getNewProduct, getNewBagPrice } from "./helpers"
 
 const INITIAL_STATE = {
 	products: [],
@@ -9,22 +9,21 @@ const INITIAL_STATE = {
 
 export const addProductToBag = createAction("ADD_PRODUCT_TO_BAG")
 export const removeProductFromBag = createAction("REMOVE_PRODUCT_FROM_BAG")
-export const increaseQuantity = createAction("INCREASE_QUANTITY")
-export const decreaseQuantity = createAction("DECREASE_QUANTITY")
+export const changeQuantity = createAction("CHANGE_QUANTITY")
 export const confirmProductsOnBag = createAction("CONFIRM_PRODUCTS")
 export const clearShoppingBag = createAction("CLEAR_SHOPPING_BAG")
 
 export default createReducer(INITIAL_STATE, {
 	[addProductToBag.type]: (state, action) => {
-		const { payload } = action
+		const { dishItems, dishPrice } = action.payload
 
 		const newBagProduct = {
-			description: payload.dishItems
+			description: dishItems
 				.map(item => item.overviewDescription || item.description)
 				.join(", "),
-			unitPrice: payload.dishPrice,
+			unitPrice: dishPrice,
 			quantity: 1,
-			subtotal: payload.dishPrice,
+			subtotal: dishPrice,
 			id: Math.floor(Math.random() * 10000),
 		}
 
@@ -36,32 +35,16 @@ export default createReducer(INITIAL_STATE, {
 		}
 	},
 
-	[decreaseQuantity.type]: (state, action) => {
-		if (action.payload.quantity > 1) {
-			const newProduct = decreasingQuantity(action.payload)
-
-			return {
-				...state,
-				products: state.products.map(pr =>
-					pr.id === newProduct.id ? { ...newProduct } : pr
-				),
-				bagPrice: state.bagPrice - newProduct.unitPrice,
-				isConfirmedBag: false,
-			}
-		} else {
-			return state
-		}
-	},
-
-	[increaseQuantity.type]: (state, action) => {
-		const newProduct = increasingQuantity(action.payload)
+	[changeQuantity.type]: (state, action) => {
+		const { product, changeType } = action.payload
+		const newProduct = getNewProduct(changeType, product)
 
 		return {
 			...state,
 			products: state.products.map(pr =>
 				pr.id === newProduct.id ? { ...newProduct } : pr
 			),
-			bagPrice: state.bagPrice + newProduct.unitPrice,
+			bagPrice: getNewBagPrice(changeType, state.bagPrice, newProduct.unitPrice),
 			isConfirmedBag: false,
 		}
 	},

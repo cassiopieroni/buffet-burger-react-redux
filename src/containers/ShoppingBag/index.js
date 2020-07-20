@@ -1,17 +1,18 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 
 import {
 	removeProductFromBag,
-	increaseQuantity,
-	decreaseQuantity,
+	changeQuantity,
 	confirmProductsOnBag,
 } from "../../store/ducks/shoppingBag"
 import { addMessage } from "../../store/ducks/messages"
 
 import TableProducts from "../../components/TableProducts"
 import Button from "../../components/Button"
+
+import { deletePr } from "../../store/ducks/shoppingBag/constants"
 
 import { StyledSection, StyledDiv, StyledDivEmpty } from "./styles"
 
@@ -20,27 +21,22 @@ export default () => {
 
 	const { products, bagPrice } = useSelector(state => state.shoppingBag)
 
-	const handleChangeProduct = (changeType, product) => {
-		switch (changeType) {
-			case "increase":
-				return dispatch(increaseQuantity(product))
-
-			case "decrease":
-				return dispatch(decreaseQuantity(product))
-
-			case "delete":
+	const handleChangeProduct = useCallback(
+		(changeType, product) => {
+			if (changeType === deletePr) {
 				dispatch(removeProductFromBag(product))
-				return dispatch(
+				dispatch(
 					addMessage({
 						type: "success",
 						content: "item removido da sacola com sucesso!",
 					})
 				)
-
-			default:
-				return
-		}
-	}
+			} else {
+				dispatch(changeQuantity({ product, changeType }))
+			}
+		},
+		[dispatch]
+	)
 
 	return (
 		<StyledSection>

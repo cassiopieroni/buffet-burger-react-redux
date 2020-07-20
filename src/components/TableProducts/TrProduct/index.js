@@ -5,7 +5,7 @@ import { StyledTr } from "./styles"
 
 const TrProduct = ({ product, changeProduct }) => (
 	<StyledTr>
-		<td>{product.overviewDescription || product.description}</td>
+		<td>{product.description}</td>
 
 		{changeProduct ? (
 			<ChangeableTd product={product} changeProduct={changeProduct} />

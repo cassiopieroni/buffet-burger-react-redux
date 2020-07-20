@@ -7,21 +7,21 @@ export const StyledDiv = styled.div`
 	justify-content: center;
 	height: 40px;
 
-	button {
-		cursor: pointer;
-		padding: 3px 0;
-		border: none;
-
-		img {
-			transition: all 0.2s ease-in-out;
-		}
-
-		&:hover img {
-			transform: translateY(-3px);
-		}
-	}
-
 	span {
 		margin: 0 5px;
+	}
+`
+
+export const StyledBtn = styled.button`
+	cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
+	padding: 3px 0;
+	border: none;
+
+	img {
+		transition: all 0.2s ease-in-out;
+	}
+
+	&:hover img {
+		transform: ${props => (props.disabled ? "none" : "translateY(-3px)")};
 	}
 `

@@ -22,12 +22,12 @@ export default () => {
 
 	const handleToggleItem = useCallback(
 		clickedItem => dispatch(toggleDishItem(clickedItem)),
-		[]
+		[dispatch]
 	)
 
 	const handleToggleExtraItem = useCallback(
 		clickedExtraItem => dispatch(toggleExtraItem(clickedExtraItem)),
-		[]
+		[dispatch]
 	)
 
 	const handleClickAddDishToBag = useCallback(() => {
@@ -52,7 +52,7 @@ export default () => {
 				dispatch(addMessage({ type: "error", content: msg }))
 			)
 		}
-	}, [summaryItems, requiredItems])
+	}, [summaryItems, subtotal, requiredItems, dispatch])
 
 	return (
 		<StyledDiv>
