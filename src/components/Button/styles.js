@@ -2,10 +2,10 @@ import styled from "styled-components"
 
 export const StyledButton = styled.button`
 	position: relative;
-	background-color: #f25252;
-	border-radius: 2px;
+	background-color: var(--contrast-A);
+	border-radius: 8px;
 	margin: 15px auto;
-	padding: 10px 20px;
+	width: 100%;
 	border: none;
 	box-shadow: 3px 3px 5px black;
 	box-sizing: border-box;
@@ -16,23 +16,28 @@ export const StyledButton = styled.button`
 	transition: all 0.3s ease-in-out;
 
 	&:hover {
-		transform: translateY(-4px);
+		transform: translateY(-2px);
 		box-shadow: 5px 5px 5px black;
 	}
 
-	&:hover img {
-		transform: translateY(-4px);
+	&:active {
+		transform: translateY(2px);
+		box-shadow: inset 0 0 8px black;
 	}
 
 	img {
-		margin: 0 10px;
+		padding: 6px 10px;
 		transition: all 0.3s ease-in-out;
+		background-color: rgba(0, 0, 0, 0.2);
 	}
 
 	p {
-		margin: 0 10px;
+		padding: 0 5px;
 		font-size: 1.1rem;
 		font-weight: bold;
-		color: #f1f1f1;
+		color: var(--text-color);
+		text-align: center;
+		margin: 0 auto;
+		max-width: 70%;
 	}
 `

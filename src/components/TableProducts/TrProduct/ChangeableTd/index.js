@@ -1,12 +1,12 @@
 import React from "react"
 import * as changeTypes from "../../../../store/ducks/shoppingBag/constants"
-import { StyledDiv, StyledBtn } from "./styles"
-import decBtn from "../../../../assets/dec-30x30.png"
+import { StyledTd, StyledBtn } from "./styles"
+import decBtn from "../../../../assets/sub-30x30.png"
 import addBtn from "../../../../assets/add-30x30.png"
 
 const ChangeableTd = ({ product, changeProduct }) => (
-	<td>
-		<StyledDiv>
+	<StyledTd>
+		<div>
 			<StyledBtn
 				onClick={() => changeProduct(changeTypes.decrease, product)}
 				disabled={product.quantity <= 1}
@@ -19,10 +19,10 @@ const ChangeableTd = ({ product, changeProduct }) => (
 			<StyledBtn onClick={() => changeProduct(changeTypes.increase, product)}>
 				<img src={addBtn} alt="aumentar" />
 			</StyledBtn>
-		</StyledDiv>
+		</div>
 
 		<p onClick={() => changeProduct(changeTypes.deletePr, product)}>excluir</p>
-	</td>
+	</StyledTd>
 )
 
 export default ChangeableTd

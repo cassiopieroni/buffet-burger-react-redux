@@ -15,7 +15,7 @@ const BuffetItems = props => {
 
 	return (
 		<StyledSection>
-			<h2>Selecione seus itens:</h2>
+			<h2>Selecione os ingredientes:</h2>
 
 			<SelectionOfItems
 				title={"Pão"}

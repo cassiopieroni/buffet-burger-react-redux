@@ -7,15 +7,13 @@ import {
 	changeAddressValue,
 	clearAddressFields,
 	waitingFetchAddress,
-	changePayment,
 	confirmDelivery,
 } from "../../store/ducks/delivery"
 import { addNewOrder } from "../../store/ducks/orders"
 
 import { fetchAddress } from "../../store/fetchActions"
 
-import AddressForm from "../../components/DeliveryForm/AddressForm"
-import PaymentForm from "../../components/DeliveryForm/PaymentForm"
+import DeliveryForm from "../../components/DeliveryForm"
 import NumToReal from "../../components/NumToReal"
 import Button from "../../components/Button"
 
@@ -54,14 +52,6 @@ const Delivery = props => {
 		[dispatch]
 	)
 
-	const handleChangePayment = useCallback(
-		e => {
-			const { name, value } = e.target
-			dispatch(changePayment({ name, value }))
-		},
-		[dispatch]
-	)
-
 	const handleClickSubmit = e => {
 		e.preventDefault()
 
@@ -95,7 +85,7 @@ const Delivery = props => {
 			<h2>Dados de entrega</h2>
 
 			<StyledForm onSubmit={handleClickSubmit}>
-				<AddressForm
+				<DeliveryForm
 					fetchingAddress={handleOnBlurFetchAddress}
 					changeAddress={handleChangeAddress}
 					addressForm={form.address}
@@ -116,11 +106,6 @@ const Delivery = props => {
 						</span>
 					</p>
 				</StyledDiv>
-
-				<PaymentForm
-					paymentForm={form.payment}
-					changePayment={handleChangePayment}
-				/>
 
 				<Button iconType="confirm" buttonType="submit">
 					Confirmar dados de entrega

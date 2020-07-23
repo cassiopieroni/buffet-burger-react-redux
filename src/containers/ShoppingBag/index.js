@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 
 import {
 	removeProductFromBag,
@@ -18,6 +18,7 @@ import { StyledSection, StyledDiv, StyledDivEmpty } from "./styles"
 
 export default () => {
 	const dispatch = useDispatch()
+	const history = useHistory()
 
 	const { products, bagPrice } = useSelector(state => state.shoppingBag)
 
@@ -38,6 +39,11 @@ export default () => {
 		[dispatch]
 	)
 
+	const handleConfirmProducts = useCallback(() => {
+		dispatch(confirmProductsOnBag())
+		history.push("/delivery")
+	}, [dispatch])
+
 	return (
 		<StyledSection>
 			<h2>Sacola de compras:</h2>
@@ -51,18 +57,13 @@ export default () => {
 					/>
 
 					<StyledDiv>
-						<NavLink to={"/buffet"}>
-							<Button iconType="burger">comprar mais itens</Button>
-						</NavLink>
+						<Button iconType="burger" clicked={() => history.push("/buffet")}>
+							comprar mais itens
+						</Button>
 
-						<NavLink to={"/delivery"}>
-							<Button
-								iconType="confirm"
-								clicked={() => dispatch(confirmProductsOnBag())}
-							>
-								confirmar produtos
-							</Button>
-						</NavLink>
+						<Button iconType="confirm" clicked={handleConfirmProducts}>
+							confirmar produtos
+						</Button>
 					</StyledDiv>
 				</>
 			) : (

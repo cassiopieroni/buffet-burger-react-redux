@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 import { confirmOrder } from "../../store/ducks/orders"
 
@@ -38,7 +38,6 @@ const OrderConfirmed = () => {
 		deliveryFee,
 		products,
 		productsPrice,
-		payment,
 		amount,
 		id,
 		isConfirmedOrder,
@@ -80,16 +79,6 @@ const OrderConfirmed = () => {
 				<h3>
 					Total a pagar: <NumToReal num={amount} />{" "}
 				</h3>
-
-				{payment.method === "dinheiro" ? (
-					<p>
-						{`Pague na entrega, em ${payment.method}`}
-						{payment.changeOfMoney &&
-							` (troco para: ${payment.changeOfMoney})`}
-					</p>
-				) : (
-					<p>{`Pague na entrega com ${payment.method}.`}</p>
-				)}
 
 				<Button iconType="location" clicked={() => history.push("/delivery")}>
 					Alterar dados de entrega

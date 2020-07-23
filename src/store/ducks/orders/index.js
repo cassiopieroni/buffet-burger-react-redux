@@ -14,7 +14,6 @@ export default createReducer(INITIAL_STATE, {
 			deliveryFee,
 			products,
 			productsPrice: bagPrice,
-			payment: form.payment,
 			amount: bagPrice + deliveryFee,
 			id: Math.floor(Math.random() * 10000),
 			isConfirmedOrder: false,

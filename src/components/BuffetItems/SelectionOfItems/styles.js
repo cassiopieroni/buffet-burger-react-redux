@@ -4,10 +4,10 @@ export const StyledDivWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
-	padding: 16px 0;
+	max-width: 100%;
+	padding: 8px 0;
 	position: relative;
-	margin: 15px auto;
+	margin: 16px auto;
 
 	ul {
 		display: flex;
@@ -24,12 +24,15 @@ export const StyledDivTitle = styled.div`
 
 	h3 {
 		font-size: 1.1rem;
-		font-weight: bold;
+		font-weight: 400;
 		text-align: center;
 		line-height: 1.5;
+		text-transform: uppercase;
 	}
 
 	span {
 		margin-left: 8px;
+		font-weight: 400;
+		font-size: 1rem;
 	}
 `

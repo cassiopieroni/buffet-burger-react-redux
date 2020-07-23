@@ -3,21 +3,22 @@ import styled from "styled-components"
 export const StyledTable = styled.table`
 	margin: 0 auto;
 	width: 98%;
-	color: #012840;
+	color: var(--text-color);
 
 	thead {
-		background-color: #012840;
-		color: #f4f4f4;
+		background-color: var(--background-colorA);
 	}
 
 	thead th {
 		height: 30px;
-		line-height: 30px;
+		line-height: 1.5;
+		font-weight: 400;
+		padding-bottom: 4px;
+		text-transform: uppercase;
 	}
 
 	tfoot {
-		background-color: #012840;
-		color: #f4f4f4;
+		background-color: var(--background-colorA);
 	}
 
 	tfoot tr {
@@ -30,6 +31,8 @@ export const StyledTable = styled.table`
 	tfoot tr th {
 		text-align: right;
 		padding-right: 10px;
+		font-weight: 400;
+		text-transform: uppercase;
 	}
 `
 

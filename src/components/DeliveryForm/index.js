@@ -1,8 +1,14 @@
 import React from "react"
 
-import { StyledDiv } from "./styles"
+import {
+	StyledDiv,
+	StyledLabelXL,
+	StyledLabelL,
+	StyledLabelM,
+	StyledLabelS,
+} from "./styles"
 
-const AddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
+const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 	const {
 		clientName,
 		cep,
@@ -16,105 +22,113 @@ const AddressForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 
 	return (
 		<StyledDiv>
-			<div>
+			<StyledLabelXL>
+				Nome:
 				<input
 					type="text"
 					name="clientName"
-					placeholder="SEU NOME: "
-					size="50"
+					placeholder="ex.: SEU NOME"
 					required
 					value={clientName}
 					onChange={changeAddress}
 				/>
+			</StyledLabelXL>
 
+			<StyledLabelXL>
+				Cep:
 				<input
 					type="text"
 					name="cep"
-					placeholder="CEP: 00000-000"
+					placeholder="ex.: 00000-000"
 					maxLength={9}
-					size="15"
 					required
 					maxLength="9"
 					value={cep}
 					onBlur={fetchingAddress}
 					onChange={changeAddress}
 				/>
-			</div>
+			</StyledLabelXL>
 
-			<div>
+			<StyledLabelL>
+				Rua:
 				<input
-					placeholder="RUA:"
+					placeholder="ex.: Rua Brás Cubas"
 					name="logradouro"
 					type="text"
 					id="rua"
-					size="55"
 					required
 					value={logradouro}
 					onChange={changeAddress}
 				/>
+			</StyledLabelL>
 
+			<StyledLabelS>
+				Número:
 				<input
-					placeholder="NUM:"
+					placeholder="ex.: 123"
 					name="num"
 					type="text"
 					id="rua"
-					size="10"
 					required
 					value={num}
 					onChange={changeAddress}
 				/>
-			</div>
+			</StyledLabelS>
 
-			<div>
+			<StyledLabelL>
+				Complemento (opcional):
 				<input
-					placeholder="COMPLEMENTO:"
+					placeholder="ex.: fundos"
 					name="complemento"
 					type="text"
 					id="rua"
-					size="60"
 					value={complemento}
 					onChange={changeAddress}
 				/>
+			</StyledLabelL>
 
+			<StyledLabelS>
+				UF:
 				<input
-					placeholder="UF:"
+					placeholder="ex.: SC"
 					name="uf"
 					type="text"
 					id="uf"
-					size="5"
 					maxLength="2"
 					minLength="2"
 					required
 					value={uf}
 					onChange={changeAddress}
 				/>
-			</div>
+			</StyledLabelS>
 
-			<div>
+			<StyledLabelM>
+				Cidade:
 				<input
-					placeholder="CIDADE:"
+					placeholder="ex.: Florianópolis"
 					name="localidade"
 					type="text"
 					id="cidade"
-					size="35"
 					required
 					value={localidade}
 					onChange={changeAddress}
 				/>
+			</StyledLabelM>
 
+			<StyledLabelM>
+				Bairro:
 				<input
-					placeholder="BAIRRO:"
+					placeholder="ex.: Lagoa da Conceição"
 					name="bairro"
 					type="text"
 					id="bairro"
-					size="30"
 					required
 					value={bairro}
 					onChange={changeAddress}
 				/>
-			</div>
+			</StyledLabelM>
 		</StyledDiv>
 	)
 }
 
-export default AddressForm
+export default DeliveryForm

@@ -1,20 +1,47 @@
 import styled from "styled-components"
 
-export const StyledDiv = styled.div`
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 40px;
+export const StyledTd = styled.td`
+	div {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* height: 40px; */
+	}
 
-	span {
-		margin: 0 5px;
+	div span {
+		margin: 5px;
+	}
+
+	p {
+		cursor: pointer;
+		text-decoration: underline;
+		width: max-content;
+		padding: 5px;
+		margin: 0 auto;
+		transition: all 0.1s ease-in-out;
+
+		&:hover {
+			color: red;
+		}
+	}
+
+	@media (min-width: 600px) {
+		div {
+			flex-direction: row;
+			justify-content: center;
+		}
+		div span {
+			margin: 8px;
+		}
 	}
 `
 
 export const StyledBtn = styled.button`
 	cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
-	padding: 3px 0;
+	background-color: transparent;
+	width: max-content;
+	height: max-content;
 	border: none;
 
 	img {

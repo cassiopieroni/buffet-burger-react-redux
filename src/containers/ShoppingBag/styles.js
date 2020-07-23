@@ -2,28 +2,30 @@ import styled from "styled-components"
 import { StyledSections, StyledButtons } from "../../styles/sharedStyles"
 
 export const StyledSection = styled(StyledSections)`
-	width: 800px;
 	min-height: 300px;
 	margin: 25px auto 100px;
+	max-width: 95%;
+
+	@media (min-width: 900px) {
+		max-width: 1000px;
+	}
 `
 
 export const StyledDiv = styled.div`
 	margin: 25px auto;
 	width: 90%;
+	max-width: 400px;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 
-	a {
-		text-decoration: none;
-	}
-`
+	@media (min-width: 600px) {
+		flex-direction: row;
+		max-width: 600px;
 
-export const StyledButton = styled(StyledButtons)`
-	@media (max-width: 830px) {
-		padding: 15px;
-		img {
-			display: none;
+		button {
+			width: 45%;
 		}
 	}
 `
@@ -36,6 +38,6 @@ export const StyledDivEmpty = styled.div`
 	text-align: center;
 
 	a {
-		color: #f2c777;
+		color: var(--contrast-A);
 	}
 `

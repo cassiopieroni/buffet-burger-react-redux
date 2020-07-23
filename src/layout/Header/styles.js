@@ -1,20 +1,19 @@
 import styled from "styled-components"
 
 export const StyledHeader = styled.header`
-	min-width: 600px;
-	background-color: rgba(01, 40, 64, 0.5);
+	background-color: var(--background-colorA);
 	transition: all 0.3s ease-in-out;
-
-	&:hover {
-		background-color: rgba(01, 40, 64, 0.8);
-	}
+	width: 100%;
+	max-width: 100%;
+	min-height: 10vh;
 
 	nav {
-		height: 100px;
-		box-sizing: border-box;
-		padding: 30px 20px;
+		height: 100%;
+		width: 100%;
+		padding: 20px 15px;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 	}
 
 	a {
@@ -27,39 +26,66 @@ export const StyledHeader = styled.header`
 	}
 
 	h1 {
-		padding: 10px 20px;
-		height: 40px;
-		line-height: 20px;
-		font-size: 2.3rem;
+		font-size: 2rem;
 		font-weight: bold;
 		font-style: italic;
-		color: #f25252;
-		text-shadow: #f2c777 1px 1px 1px;
-		transition: all 0.3s ease-in-out;
-	}
-`
-
-export const StyledUl = styled.ul`
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	margin-right: 50px;
-
-	img {
+		color: var(--text-color);
+		text-shadow: var(--contrast-A) 2px 2px 2px;
 		padding: 5px;
-		margin-left: 15px;
+	}
+
+	ul {
+		display: flex;
+		align-items: center;
+	}
+
+	ul a {
+		margin-left: 8px;
+	}
+
+	ul a img {
+		padding: 5px;
 		cursor: pointer;
 	}
 
-	div {
+	ul div {
 		position: relative;
 	}
 
-	div p {
+	ul div span {
 		position: absolute;
 		bottom: 15px;
-		left: 65px;
-		font-size: 1.1rem;
-		color: #f4f4f4;
+		right: 0px;
+		background-color: var(--contrast-A);
+		padding: 1px 4px;
+		font-size: 1rem;
+		color: var(--text-color);
+		border-radius: 5px;
+	}
+
+	@media (min-width: 600px) {
+		nav {
+			padding: 20px;
+		}
+
+		h1 {
+			font-size: 2.3rem;
+		}
+	}
+
+	@media (min-width: 900px) {
+		nav {
+			padding: 20px 40px;
+		}
+
+		nav ul a {
+			margin-left: 24px;
+		}
+	}
+
+	@media (min-width: 1500px) {
+		nav {
+			padding: 20px 50px;
+		}
 	}
 `

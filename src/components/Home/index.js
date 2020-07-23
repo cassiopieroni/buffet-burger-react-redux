@@ -1,15 +1,17 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { StyledDiv, StyledButton } from "./styles"
 import burgerIcon from "../../assets/burger-50x50-white.png"
 
-export default () => (
-	<StyledDiv>
-		<NavLink to="/buffet">
-			<StyledButton>
+export default () => {
+	const history = useHistory()
+
+	return (
+		<StyledDiv>
+			<StyledButton onClick={() => history.push("/buffet")}>
 				<img src={burgerIcon} alt="hamburger" />
 				<p>Sirva-se aqui</p>
 			</StyledButton>
-		</NavLink>
-	</StyledDiv>
-)
+		</StyledDiv>
+	)
+}

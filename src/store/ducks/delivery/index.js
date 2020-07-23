@@ -12,13 +12,8 @@ const INITIAL_STATE = {
 			localidade: "",
 			uf: "",
 		},
-		payment: {
-			method: "",
-			changeOfMoney: "",
-		},
 	},
 	isValidCep: false,
-	//isFetchingData: false,
 	deliveryFee: 0,
 	confirmedDelivery: false,
 }
@@ -27,7 +22,6 @@ export const changeAddressValue = createAction("CHANGE_ADDRESS_VALUE")
 export const clearAddressFields = createAction("CLEAR_ADDRESS_FIELDS")
 export const waitingFetchAddress = createAction("WAITING_FETCH_ADDRESS")
 export const updateAddressWithFetchedData = createAction("UPDATE_ADDRESS")
-export const changePayment = createAction("CHANGE_PAYMENT")
 export const clearDelivery = createAction("CLEAR_DELIVERY")
 export const confirmDelivery = createAction("CONFIRM_DELIVERY")
 
@@ -94,18 +88,6 @@ export default createReducer(INITIAL_STATE, {
 		isValidCep: true,
 		//isFetchingData: false,
 		deliveryFee: 7,
-		confirmedDelivery: false,
-	}),
-
-	[changePayment.type]: (state, action) => ({
-		...state,
-		form: {
-			...state.form,
-			payment: {
-				...state.form.payment,
-				[action.payload.name]: action.payload.value,
-			},
-		},
 		confirmedDelivery: false,
 	}),
 
