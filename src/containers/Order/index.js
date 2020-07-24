@@ -3,13 +3,26 @@ import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 
 import { confirmOrder } from "../../store/ducks/orders"
+import { clearDish } from "../../store/ducks/buffet"
+import { clearShoppingBag } from "../../store/ducks/shoppingBag"
+import { clearDelivery } from "../../store/ducks/delivery"
+import { addMessage } from "../../store/ducks/messages"
 
-import NotFoundOrder from "../../components/NotFoundOrder"
+import RouteRedirector from "../RouteRedirector"
+
 import TableProducts from "../../components/TableProducts"
 import NumToReal from "../../components/NumToReal"
 import Button from "../../components/Button"
+import Spinner from "../../components/Spinner"
 
-import { StyledSection, StyledDivWrapperTable, StyledDiv } from "./styles"
+import {
+	StyledSection,
+	StyledDivWrapper,
+	StyledDivWrapperBtnBlue,
+	StyledDivWrapperBtns,
+	StyledDiv,
+	StyledP,
+} from "./styles"
 
 const OrderConfirmed = () => {
 	const order = useSelector(state => state.orders[0])
@@ -22,7 +35,16 @@ const OrderConfirmed = () => {
 		id => {
 			setLoading(true)
 			setTimeout(() => {
+				dispatch(clearDish())
+				dispatch(clearShoppingBag())
+				dispatch(clearDelivery())
 				dispatch(confirmOrder(id))
+				dispatch(
+					addMessage({
+						type: "success",
+						content: "Pedido Confirmado!",
+					})
+				)
 				setLoading(false)
 			}, 2000)
 		},
@@ -30,7 +52,7 @@ const OrderConfirmed = () => {
 	)
 
 	if (!order) {
-		return <NotFoundOrder />
+		return <RouteRedirector />
 	}
 
 	const {
@@ -46,54 +68,74 @@ const OrderConfirmed = () => {
 	return (
 		<StyledSection>
 			<h2>Resumo do seu pedido:</h2>
-
-			<StyledDivWrapperTable>
+			<StyledDivWrapper>
 				<TableProducts
 					products={products}
 					subTotal={productsPrice}
 					bagPrice={productsPrice}
 				/>
-			</StyledDivWrapperTable>
 
-			<Button iconType="burger" clicked={() => history.push("/buffet")}>
-				Adicionar mais itens
-			</Button>
+				{!isConfirmedOrder && (
+					<StyledDivWrapperBtnBlue>
+						<Button iconType="burger" clicked={() => history.push("/buffet")}>
+							Adicionar mais itens
+						</Button>
 
-			<Button iconType="shoppingBag" clicked={() => history.push("/shopping-bag")}>
-				Alterar itens da sacola
-			</Button>
+						<Button
+							iconType="shoppingBag"
+							clicked={() => history.push("/shopping-bag")}
+						>
+							Alterar itens da sacola
+						</Button>
+					</StyledDivWrapperBtnBlue>
+				)}
+			</StyledDivWrapper>
 
-			<h2>Dados de entrega:</h2>
+			<StyledDivWrapper>
+				<h3>Dados de entrega:</h3>
 
-			<StyledDiv>
-				<p>{address.clientName}</p>
-				<p>{`cep: ${address.cep}`}</p>
-				<p>{`${address.logradouro}, ${address.num} ${address.complemento}`}</p>
-				<p>{`${address.bairro}. ${address.localidade}, ${address.uf}`}</p>
-			</StyledDiv>
+				<StyledDiv>
+					<p>{address.clientName}</p>
+					<p>{`cep: ${address.cep}`}</p>
+					<p>{`${address.logradouro}, ${address.num} ${address.complemento}`}</p>
+					<p>{`${address.bairro}. ${address.localidade}, ${address.uf}`}</p>
+					<p>
+						Taxa de entrega: <NumToReal num={deliveryFee} />{" "}
+					</p>
+				</StyledDiv>
 
-			<StyledDiv>
-				<h3>
-					Taxa de entrega: <NumToReal num={deliveryFee} />{" "}
-				</h3>
-				<h3>
-					Total a pagar: <NumToReal num={amount} />{" "}
-				</h3>
+				{!isConfirmedOrder && (
+					<StyledDivWrapperBtnBlue>
+						<Button
+							iconType="location"
+							clicked={() => history.push("/delivery")}
+						>
+							Alterar entrega
+						</Button>
+					</StyledDivWrapperBtnBlue>
+				)}
+			</StyledDivWrapper>
 
-				<Button iconType="location" clicked={() => history.push("/delivery")}>
-					Alterar dados de entrega
-				</Button>
-			</StyledDiv>
+			<StyledDivWrapper>
+				<p>
+					Total a pagar: <NumToReal num={amount} />
+				</p>
 
-			{loading ? (
-				"...LOADING..."
-			) : isConfirmedOrder ? (
-				"Pedido Confirmado!"
-			) : (
-				<Button iconType="confirmedBurger" clicked={() => handleConfirmOrder(id)}>
-					Confirmar pedido
-				</Button>
-			)}
+				{loading ? (
+					<Spinner />
+				) : isConfirmedOrder ? (
+					<StyledP>Pedido Confirmado!</StyledP>
+				) : (
+					<StyledDivWrapperBtns>
+						<Button
+							iconType="confirmedBurger"
+							clicked={() => handleConfirmOrder(id)}
+						>
+							Confirmar pedido
+						</Button>
+					</StyledDivWrapperBtns>
+				)}
+			</StyledDivWrapper>
 		</StyledSection>
 	)
 }

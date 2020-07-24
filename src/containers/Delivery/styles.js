@@ -2,9 +2,6 @@ import styled from "styled-components"
 import { StyledSections } from "../../styles/sharedStyles"
 
 export const StyledSection = styled(StyledSections)`
-	min-height: 300px;
-	width: 95%;
-	max-width: 900px;
 	margin: 25px auto 100px;
 	padding-bottom: 50px;
 `
@@ -22,7 +19,7 @@ export const StyledForm = styled.form`
 
 export const StyledDiv = styled.div`
 	margin: 20px auto;
-	color: #f4f4f4;
+	color: var(--text-color);
 	font-style: italic;
 
 	p {
@@ -32,14 +29,5 @@ export const StyledDiv = styled.div`
 
 	p span {
 		margin-left: 10px;
-	}
-
-	p:last-child {
-		font-weight: bold;
-
-		span {
-			color: #f25252;
-			font-size: 1.1rem;
-		}
 	}
 `

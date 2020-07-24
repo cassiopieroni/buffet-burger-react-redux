@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 import {
 	removeProductFromBag,
@@ -8,13 +8,14 @@ import {
 	confirmProductsOnBag,
 } from "../../store/ducks/shoppingBag"
 import { addMessage } from "../../store/ducks/messages"
+import { deletePr } from "../../store/ducks/shoppingBag/constants"
+
+import RouteRedirector from "../RouteRedirector"
 
 import TableProducts from "../../components/TableProducts"
 import Button from "../../components/Button"
 
-import { deletePr } from "../../store/ducks/shoppingBag/constants"
-
-import { StyledSection, StyledDiv, StyledDivEmpty } from "./styles"
+import { StyledSection, StyledDiv } from "./styles"
 
 export default () => {
 	const dispatch = useDispatch()
@@ -42,7 +43,7 @@ export default () => {
 	const handleConfirmProducts = useCallback(() => {
 		dispatch(confirmProductsOnBag())
 		history.push("/delivery")
-	}, [dispatch])
+	}, [dispatch, history])
 
 	return (
 		<StyledSection>
@@ -67,11 +68,7 @@ export default () => {
 					</StyledDiv>
 				</>
 			) : (
-				<StyledDivEmpty>
-					{`Você ainda não possui produtos na sacola, `}
-					<NavLink to={"/buffet"}>clique aqui</NavLink>
-					{` para adicionar um novo produto!`}
-				</StyledDivEmpty>
+				<RouteRedirector />
 			)}
 		</StyledSection>
 	)

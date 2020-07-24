@@ -25,10 +25,19 @@ export const StyledButton = styled.button`
 		box-shadow: inset 0 0 8px black;
 	}
 
-	img {
-		padding: 6px 10px;
-		transition: all 0.3s ease-in-out;
+	div {
+		width: 60px;
+		height: 60px;
 		background-color: rgba(0, 0, 0, 0.2);
+		border-radius: 8px 0 0 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	div img {
+		transition: all 0.3s ease-in-out;
+		background-color: transparent;
 	}
 
 	p {

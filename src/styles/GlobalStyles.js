@@ -9,6 +9,10 @@ export default createGlobalStyle`
         --color-A: #a8dadc;
 		--color-B: #457b9d;
         --text-color: #f1faee;
+		--error-background: #ffe6e8;
+		--error-color: #cf1717;
+		--success-background: #e5f9e0;
+		--success-color: #00a878;
 	}
   
 	* {

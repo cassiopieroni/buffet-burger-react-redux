@@ -8,35 +8,6 @@ export const StyledSection = styled(StyledSectionsBg)`
 	margin: 15px 5px;
 	padding: 35px 10px;
 
-	div {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 90%;
-		height: max-content;
-		margin: 0 auto;
-	}
-
-	h3 {
-		text-transform: uppercase;
-		text-align: center;
-		font-size: 1.2rem;
-		font-weight: bold;
-		margin-bottom: 25px;
-		width: 100%;
-		color: var(--text-color);
-	}
-
-	ul {
-		width: 100%;
-		text-align: start;
-		font-size: 1.2rem;
-	}
-
-	div button {
-		width: 90%;
-	}
-
 	a {
 		margin: 20px auto 10px auto;
 		color: var(--text-color);
@@ -54,18 +25,64 @@ export const StyledSection = styled(StyledSectionsBg)`
 
 	@media (min-width: 600px) {
 		width: 400px;
-		div {
-			width: 80%;
-		}
 	}
 
 	@media (min-width: 900px) {
 		width: 30%;
 		max-width: 400px;
 		margin-left: 16px;
-		div {
-			width: 90%;
+	}
+`
+
+export const StyledDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 90%;
+	height: max-content;
+	margin: 0 auto;
+
+	h3 {
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 1.2rem;
+		font-weight: bold;
+		margin-bottom: 25px;
+		width: 100%;
+		color: var(--text-color);
+	}
+
+	ul {
+		width: 100%;
+		text-align: start;
+		font-size: 1.2rem;
+	}
+
+	a {
+		margin: 20px auto 10px auto;
+		color: var(--text-color);
+		font-size: 1.1rem;
+		text-decoration: none;
+		border-bottom: 1px solid #f1f1f1;
+		padding-bottom: 3px;
+		transition: all 0.2s ease-in-out;
+
+		&:hover {
+			color: var(--contrast-A);
+			border-bottom: 1px solid var(--contrast-A);
 		}
+	}
+
+	button {
+		max-width: 250px;
+	}
+
+	@media (min-width: 600px) {
+		width: 80%;
+	}
+
+	@media (min-width: 900px) {
+		width: 90%;
 	}
 `
 

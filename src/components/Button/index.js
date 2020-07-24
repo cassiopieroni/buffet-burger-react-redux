@@ -32,7 +32,11 @@ const Button = ({ clicked, iconType, children, buttonType }) => {
 
 	return (
 		<StyledButton onClick={clicked || null} type={buttonType || "button"}>
-			{icon && <img src={icon} alt={iconType} />}
+			{icon && (
+				<div>
+					<img src={icon} alt={iconType} />
+				</div>
+			)}
 			<p>{children}</p>
 		</StyledButton>
 	)

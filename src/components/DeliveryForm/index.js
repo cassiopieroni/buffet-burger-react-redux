@@ -42,7 +42,6 @@ const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					placeholder="ex.: 00000-000"
 					maxLength={9}
 					required
-					maxLength="9"
 					value={cep}
 					onBlur={fetchingAddress}
 					onChange={changeAddress}
@@ -94,8 +93,8 @@ const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					name="uf"
 					type="text"
 					id="uf"
-					maxLength="2"
-					minLength="2"
+					maxLength={2}
+					minLength={2}
 					required
 					value={uf}
 					onChange={changeAddress}

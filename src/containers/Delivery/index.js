@@ -1,6 +1,5 @@
 import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Redirect } from "react-router-dom"
 
 import { addMessage } from "../../store/ducks/messages"
 import {
@@ -12,6 +11,8 @@ import {
 import { addNewOrder } from "../../store/ducks/orders"
 
 import { fetchAddress } from "../../store/fetchActions"
+
+import RouteRedirector from "../RouteRedirector"
 
 import DeliveryForm from "../../components/DeliveryForm"
 import NumToReal from "../../components/NumToReal"
@@ -70,17 +71,9 @@ const Delivery = props => {
 		dispatch(addMessage({ type: "success", content: "endereço confirmado!" }))
 	}
 
-	if (!isConfirmedBag) {
-		dispatch(
-			addMessage({
-				type: "error",
-				content: "Confirme sua sacola de compras",
-			})
-		)
-		return <Redirect to="/shopping-bag" />
-	}
-
-	return (
+	return !isConfirmedBag ? (
+		<RouteRedirector />
+	) : (
 		<StyledSection>
 			<h2>Dados de entrega</h2>
 
@@ -96,13 +89,6 @@ const Delivery = props => {
 						Taxa de entrega:
 						<span>
 							{deliveryFee ? <NumToReal num={deliveryFee} /> : "..."}
-						</span>
-					</p>
-
-					<p>
-						Total a pagar:{" "}
-						<span>
-							<NumToReal num={bagPrice + deliveryFee} />
 						</span>
 					</p>
 				</StyledDiv>

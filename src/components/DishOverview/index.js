@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom"
 import DishItem from "./DishItem"
 import NumToReal from "../NumToReal"
 import Button from "../Button"
-import { StyledSection, StyledP1, StyledP2 } from "./styles"
+import { StyledSection, StyledDiv, StyledP1, StyledP2 } from "./styles"
 
 const DishOverview = ({ dishSummary, subtotal, handleClick, productsLength }) => (
 	<StyledSection>
-		<div>
+		<StyledDiv>
 			<h3>Descrição do prato</h3>
 
 			{dishSummary && dishSummary.length ? (
@@ -31,7 +31,7 @@ const DishOverview = ({ dishSummary, subtotal, handleClick, productsLength }) =>
 			</Button>
 
 			<NavLink to="/shopping-bag">{`sacola de compras ( ${productsLength} )`}</NavLink>
-		</div>
+		</StyledDiv>
 	</StyledSection>
 )
 

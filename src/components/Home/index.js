@@ -1,17 +1,17 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
-import { StyledDiv, StyledButton } from "./styles"
-import burgerIcon from "../../assets/burger-50x50-white.png"
+import { StyledDiv } from "./styles"
+
+import Button from "../Button"
 
 export default () => {
 	const history = useHistory()
 
 	return (
 		<StyledDiv>
-			<StyledButton onClick={() => history.push("/buffet")}>
-				<img src={burgerIcon} alt="hamburger" />
-				<p>Sirva-se aqui</p>
-			</StyledButton>
+			<Button iconType="burger" clicked={() => history.push("/buffet")}>
+				Sirva-se
+			</Button>
 		</StyledDiv>
 	)
 }
