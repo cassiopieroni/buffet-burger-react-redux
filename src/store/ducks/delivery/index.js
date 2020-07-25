@@ -1,17 +1,15 @@
 import { createReducer, createAction } from "@reduxjs/toolkit"
 
 const INITIAL_STATE = {
-	form: {
-		address: {
-			clientName: "",
-			cep: "",
-			logradouro: "",
-			num: "",
-			complemento: "",
-			bairro: "",
-			localidade: "",
-			uf: "",
-		},
+	address: {
+		clientName: "",
+		cep: "",
+		logradouro: "",
+		num: "",
+		complemento: "",
+		bairro: "",
+		localidade: "",
+		uf: "",
 	},
 	isValidCep: false,
 	deliveryFee: 0,
@@ -28,25 +26,19 @@ export const confirmDelivery = createAction("CONFIRM_DELIVERY")
 export default createReducer(INITIAL_STATE, {
 	[changeAddressValue.type]: (state, action) => ({
 		...state,
-		form: {
-			...state.form,
-			address: {
-				...state.form.address,
-				[action.payload.name]: action.payload.value,
-			},
+		address: {
+			...state.address,
+			[action.payload.name]: action.payload.value,
 		},
 		confirmedDelivery: false,
 	}),
 
 	[clearAddressFields.type]: state => ({
 		...state,
-		form: {
-			...state.form,
-			address: {
-				...INITIAL_STATE.form.address,
-				cep: state.form.address.cep,
-				clientName: state.form.address.clientName,
-			},
+		address: {
+			...INITIAL_STATE.address,
+			cep: state.address.cep,
+			clientName: state.address.clientName,
 		},
 		isValidCep: false,
 		//isFetchingData: false,
@@ -56,34 +48,27 @@ export default createReducer(INITIAL_STATE, {
 
 	[waitingFetchAddress.type]: state => ({
 		...state,
-		form: {
-			...state.form,
-			address: {
-				...state.form.address,
-				logradouro: "buscando dados...",
-				num: "",
-				complemento: "",
-				bairro: "buscando dados...",
-				localidade: "buscando dados...",
-				uf: "buscando dados...",
-			},
+		address: {
+			...state.address,
+			logradouro: "buscando dados...",
+			num: "",
+			complemento: "",
+			bairro: "buscando dados...",
+			localidade: "buscando dados...",
+			uf: "buscando dados...",
 		},
 		isValidCep: false,
 		confirmedDelivery: false,
-		//isFetchingData: true,
 	}),
 
 	[updateAddressWithFetchedData.type]: (state, action) => ({
 		...state,
-		form: {
-			...state.form,
-			address: {
-				...state.form.address,
-				logradouro: action.payload.logradouro,
-				bairro: action.payload.bairro,
-				localidade: action.payload.localidade,
-				uf: action.payload.uf,
-			},
+		address: {
+			...state.address,
+			logradouro: action.payload.logradouro,
+			bairro: action.payload.bairro,
+			localidade: action.payload.localidade,
+			uf: action.payload.uf,
 		},
 		isValidCep: true,
 		//isFetchingData: false,

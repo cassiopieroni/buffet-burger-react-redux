@@ -7,10 +7,10 @@ export const confirmOrder = createAction("CONFIRM_ORDER")
 
 export default createReducer(INITIAL_STATE, {
 	[addNewOrder.type]: (state, action) => {
-		const { products, bagPrice, form, deliveryFee } = action.payload
+		const { products, bagPrice, address, deliveryFee } = action.payload
 
 		const newOrder = {
-			address: form.address,
+			address,
 			deliveryFee,
 			products,
 			productsPrice: bagPrice,

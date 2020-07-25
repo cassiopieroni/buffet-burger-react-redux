@@ -24,9 +24,9 @@ const Delivery = props => {
 	const dispatch = useDispatch()
 
 	const { isConfirmedBag, products, bagPrice } = useSelector(state => state.shoppingBag)
-	const { form, isValidCep, deliveryFee } = useSelector(state => state.delivery)
+	const { address, isValidCep, deliveryFee } = useSelector(state => state.delivery)
 
-	const { cep } = form.address
+	const { cep } = address
 
 	const handleOnBlurFetchAddress = useCallback(() => {
 		const regExpCEP = cep.replace(/\D/g, "")
@@ -57,7 +57,7 @@ const Delivery = props => {
 		e.preventDefault()
 
 		if (isValidCep) {
-			const orderData = { products, bagPrice, form, deliveryFee }
+			const orderData = { products, bagPrice, address, deliveryFee }
 			confirmingDeliveryData(orderData)
 			props.history.push("/order")
 		} else {
@@ -81,7 +81,7 @@ const Delivery = props => {
 				<DeliveryForm
 					fetchingAddress={handleOnBlurFetchAddress}
 					changeAddress={handleChangeAddress}
-					addressForm={form.address}
+					addressForm={address}
 				/>
 
 				<StyledDiv>
