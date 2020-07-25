@@ -2,16 +2,18 @@ import { configureStore } from "@reduxjs/toolkit"
 
 import shoppingBag from "./ducks/shoppingBag"
 import messages from "./ducks/messages"
-import buffet from "./ducks/buffet"
+import dish from "./ducks/dish"
 import delivery from "./ducks/delivery"
 import orders from "./ducks/orders"
+import initialData from "./ducks/initialData"
 
 export default configureStore({
 	reducer: {
-		buffet,
+		dish,
 		shoppingBag,
 		delivery,
 		orders,
 		messages,
+		initialData,
 	},
 })

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { toggleDishItem, toggleExtraItem, clearDish } from "../../store/ducks/buffet"
+import { toggleDishItem, toggleExtraItem, clearDish } from "../../store/ducks/dish"
 import { addProductToBag } from "../../store/ducks/shoppingBag"
 import { addMessage } from "../../store/ducks/messages"
 
@@ -15,10 +15,9 @@ import { StyledDiv } from "./styles"
 export default () => {
 	const dispatch = useDispatch()
 
-	const { buffetData, requiredItems, dish } = useSelector(state => state.buffet)
+	const { buffetData, requiredItems } = useSelector(state => state.initialData)
+	const { summaryItems, subtotal, selectedItems } = useSelector(state => state.dish)
 	const productsLength = useSelector(state => state.shoppingBag.products.length)
-
-	const { summaryItems, subtotal, selectedItems } = dish
 
 	const handleToggleItem = useCallback(
 		clickedItem => dispatch(toggleDishItem(clickedItem)),

@@ -10,6 +10,11 @@ const BuffetItems = props => {
 		selectedItems,
 		requiredItems,
 	} = props
+
+	if (!buffetData || !buffetData.allBreads) {
+		return null
+	}
+
 	const { allBreads, allBurgers, allCheeses, allExtras, allMeatSpots } = buffetData
 	const { bread, burger, cheese, extras, meatSpot } = selectedItems
 

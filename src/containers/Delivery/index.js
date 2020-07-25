@@ -10,7 +10,7 @@ import {
 } from "../../store/ducks/delivery"
 import { addNewOrder } from "../../store/ducks/orders"
 
-import { fetchAddress } from "../../store/fetchActions"
+import { fetchAddress } from "../../store/fetchActions/fetchAddress"
 
 import RouteRedirector from "../RouteRedirector"
 

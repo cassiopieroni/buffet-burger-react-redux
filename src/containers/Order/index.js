@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 
 import { confirmOrder } from "../../store/ducks/orders"
-import { clearDish } from "../../store/ducks/buffet"
+import { clearDish } from "../../store/ducks/dish"
 import { clearShoppingBag } from "../../store/ducks/shoppingBag"
 import { clearDelivery } from "../../store/ducks/delivery"
 import { addMessage } from "../../store/ducks/messages"
