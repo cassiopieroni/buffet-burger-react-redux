@@ -1,7 +1,13 @@
 import { createReducer, createAction } from "@reduxjs/toolkit"
 import { getDishPrice, getSummaryItems } from "./helpers"
 
-const INITIAL_STATE = {
+export const actions = {
+	TOGGLE_ITEM: "TOGGLE_ITEM",
+	TOGGLE_EXTRA_ITEM: "TOGGLE_EXTRA_ITEM",
+	CLEAR_DISH: "CLEAR_DISH",
+}
+
+export const INITIAL_STATE = {
 	selectedItems: {
 		bread: { value: "" },
 		burger: { value: "" },
@@ -13,15 +19,14 @@ const INITIAL_STATE = {
 	subtotal: 0,
 }
 
-export const toggleDishItem = createAction("TOGGLE_ITEM")
-export const toggleExtraItem = createAction("TOGGLE_EXTRA_ITEM")
-export const clearDish = createAction("CLEAR_DISH")
+export const toggleDishItem = createAction(actions.TOGGLE_ITEM)
+export const toggleExtraItem = createAction(actions.TOGGLE_EXTRA_ITEM)
+export const clearDish = createAction(actions.CLEAR_DISH)
 
 export default createReducer(INITIAL_STATE, {
 	[toggleDishItem.type]: (state, action) => {
 		const clickedItem = action.payload
 		const prevSelectedItem = state.selectedItems[clickedItem.type]
-
 		const isAlmostSelected = clickedItem.value === prevSelectedItem.value
 
 		const newSelectedItems = {
