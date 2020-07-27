@@ -1,22 +1,29 @@
 import { createAction, createReducer } from "@reduxjs/toolkit"
 import { getNewProduct, getNewBagPrice } from "./helpers"
 
+export const actions = {
+	ADD_PRODUCT_TO_BAG: "ADD_PRODUCT_TO_BAG",
+	REMOVE_PRODUCT_FROM_BAG: "REMOVE_PRODUCT_FROM_BAG",
+	CHANGE_QUANTITY: "CHANGE_QUANTITY",
+	CONFIRM_PRODUCTS: "CONFIRM_PRODUCTS",
+	CLEAR_SHOPPING_BAG: "CLEAR_SHOPPING_BAG",
+}
+
 const INITIAL_STATE = {
 	products: [],
 	bagPrice: 0,
 	isConfirmedBag: false,
 }
 
-export const addProductToBag = createAction("ADD_PRODUCT_TO_BAG")
-export const removeProductFromBag = createAction("REMOVE_PRODUCT_FROM_BAG")
-export const changeQuantity = createAction("CHANGE_QUANTITY")
-export const confirmProductsOnBag = createAction("CONFIRM_PRODUCTS")
-export const clearShoppingBag = createAction("CLEAR_SHOPPING_BAG")
+export const addProductToBag = createAction(actions.ADD_PRODUCT_TO_BAG)
+export const removeProductFromBag = createAction(actions.REMOVE_PRODUCT_FROM_BAG)
+export const changeQuantity = createAction(actions.CHANGE_QUANTITY)
+export const confirmProductsOnBag = createAction(actions.CONFIRM_PRODUCTS)
+export const clearShoppingBag = createAction(actions.CLEAR_SHOPPING_BAG)
 
 export default createReducer(INITIAL_STATE, {
 	[addProductToBag.type]: (state, action) => {
 		const { dishItems, dishPrice } = action.payload
-
 		const newBagProduct = {
 			description: dishItems
 				.map(item => item.overviewDescription || item.description)
