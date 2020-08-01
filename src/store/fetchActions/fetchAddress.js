@@ -1,4 +1,8 @@
-import { updateAddressWithFetchedData, clearAddressFields } from "../ducks/delivery"
+import {
+	updateAddressWithFetchedData,
+	clearAddressFields,
+	waitingFetchAddress,
+} from "../ducks/delivery"
 import { addMessage } from "../ducks/messages"
 
 const BASE_URL = `https://viacep.com.br/ws`
@@ -13,6 +17,7 @@ export const fetchAddress = cep => {
 					dispatch(
 						addMessage({ type: "error", content: "cep não encontrado!" })
 					)
+					dispatch(waitingFetchAddress(false))
 					dispatch(clearAddressFields())
 				} else dispatch(updateAddressWithFetchedData(data))
 			})

@@ -17,14 +17,17 @@ import RouteRedirector from "../RouteRedirector"
 import DeliveryForm from "../../components/DeliveryForm"
 import NumToReal from "../../components/NumToReal"
 import Button from "../../components/Button"
+import Spinner from "../../components/Spinner"
 
-import { StyledSection, StyledForm, StyledDiv } from "./styles"
+import { StyledSection, StyledForm, StyledDiv, StyledDivLoading } from "./styles"
 
 const Delivery = props => {
 	const dispatch = useDispatch()
 
 	const { isConfirmedBag, products, bagPrice } = useSelector(state => state.shoppingBag)
-	const { address, isValidCep, deliveryFee } = useSelector(state => state.delivery)
+	const { address, isValidCep, deliveryFee, loading } = useSelector(
+		state => state.delivery
+	)
 
 	const { cep } = address
 
@@ -34,9 +37,10 @@ const Delivery = props => {
 
 		if (regExpCEP !== "") {
 			if (validateCep.test(regExpCEP)) {
-				dispatch(waitingFetchAddress())
+				dispatch(waitingFetchAddress(true))
 				dispatch(fetchAddress(regExpCEP))
 			} else {
+				dispatch(waitingFetchAddress(false))
 				dispatch(addMessage({ type: "error", content: "CEP inválido" }))
 				dispatch(clearAddressFields())
 			}
@@ -97,6 +101,12 @@ const Delivery = props => {
 					Confirmar dados de entrega
 				</Button>
 			</StyledForm>
+
+			{loading && (
+				<StyledDivLoading>
+					<Spinner />
+				</StyledDivLoading>
+			)}
 		</StyledSection>
 	)
 }

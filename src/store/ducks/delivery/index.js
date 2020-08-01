@@ -1,6 +1,15 @@
 import { createReducer, createAction } from "@reduxjs/toolkit"
 
-const INITIAL_STATE = {
+export const actions = {
+	CHANGE_ADDRESS_VALUE: "CHANGE_ADDRESS_VALUE",
+	CLEAR_ADDRESS_FIELDS: "CLEAR_ADDRESS_FIELDS",
+	WAITING_FETCH_ADDRESS: "WAITING_FETCH_ADDRESS",
+	UPDATE_ADDRESS: "UPDATE_ADDRESS",
+	CLEAR_DELIVERY: "CLEAR_DELIVERY",
+	CONFIRM_DELIVERY: "CONFIRM_DELIVERY",
+}
+
+export const INITIAL_STATE = {
 	address: {
 		clientName: "",
 		cep: "",
@@ -14,14 +23,15 @@ const INITIAL_STATE = {
 	isValidCep: false,
 	deliveryFee: 0,
 	confirmedDelivery: false,
+	loading: false,
 }
 
-export const changeAddressValue = createAction("CHANGE_ADDRESS_VALUE")
-export const clearAddressFields = createAction("CLEAR_ADDRESS_FIELDS")
-export const waitingFetchAddress = createAction("WAITING_FETCH_ADDRESS")
-export const updateAddressWithFetchedData = createAction("UPDATE_ADDRESS")
-export const clearDelivery = createAction("CLEAR_DELIVERY")
-export const confirmDelivery = createAction("CONFIRM_DELIVERY")
+export const changeAddressValue = createAction(actions.CHANGE_ADDRESS_VALUE)
+export const clearAddressFields = createAction(actions.CLEAR_ADDRESS_FIELDS)
+export const waitingFetchAddress = createAction(actions.WAITING_FETCH_ADDRESS)
+export const updateAddressWithFetchedData = createAction(actions.UPDATE_ADDRESS)
+export const clearDelivery = createAction(actions.CLEAR_DELIVERY)
+export const confirmDelivery = createAction(actions.CONFIRM_DELIVERY)
 
 export default createReducer(INITIAL_STATE, {
 	[changeAddressValue.type]: (state, action) => ({
@@ -41,22 +51,13 @@ export default createReducer(INITIAL_STATE, {
 			clientName: state.address.clientName,
 		},
 		isValidCep: false,
-		//isFetchingData: false,
 		deliveryFee: 0,
 		confirmedDelivery: false,
 	}),
 
-	[waitingFetchAddress.type]: state => ({
+	[waitingFetchAddress.type]: (state, action) => ({
 		...state,
-		address: {
-			...state.address,
-			logradouro: "buscando dados...",
-			num: "",
-			complemento: "",
-			bairro: "buscando dados...",
-			localidade: "buscando dados...",
-			uf: "buscando dados...",
-		},
+		loading: action.payload,
 		isValidCep: false,
 		confirmedDelivery: false,
 	}),
@@ -71,7 +72,7 @@ export default createReducer(INITIAL_STATE, {
 			uf: action.payload.uf,
 		},
 		isValidCep: true,
-		//isFetchingData: false,
+		loading: false,
 		deliveryFee: 7,
 		confirmedDelivery: false,
 	}),

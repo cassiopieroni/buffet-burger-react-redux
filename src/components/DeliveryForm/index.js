@@ -45,6 +45,7 @@ const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					value={cep}
 					onBlur={fetchingAddress}
 					onChange={changeAddress}
+					data-testid="addressForm-cep"
 				/>
 			</StyledLabelXL>
 
@@ -58,6 +59,7 @@ const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 					required
 					value={logradouro}
 					onChange={changeAddress}
+					data-testid="addressForm-street"
 				/>
 			</StyledLabelL>
 
