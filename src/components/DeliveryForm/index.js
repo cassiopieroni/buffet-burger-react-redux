@@ -21,7 +21,7 @@ const DeliveryForm = ({ fetchingAddress, changeAddress, addressForm }) => {
 	} = addressForm
 
 	return (
-		<StyledDiv>
+		<StyledDiv data-testid="fields-group">
 			<StyledLabelXL>
 				Nome:
 				<input

@@ -103,7 +103,7 @@ const Delivery = props => {
 			</StyledForm>
 
 			{loading && (
-				<StyledDivLoading>
+				<StyledDivLoading data-testid="form-loading">
 					<Spinner />
 				</StyledDivLoading>
 			)}
