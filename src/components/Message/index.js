@@ -12,7 +12,7 @@ const Message = ({ message, removeMessage }) => {
 	const msgDelay = 3000
 
 	return (
-		<StyledLi isError={isError} delay={msgDelay / 1000 + 0.1}>
+		<StyledLi isError={isError} delay={msgDelay / 1000 + 0.1} data-testid="message">
 			<div>
 				<img
 					src={isError ? `${errorIcon}` : `${successIcon}`}

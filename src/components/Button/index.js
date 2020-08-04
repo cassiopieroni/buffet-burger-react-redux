@@ -7,7 +7,7 @@ import confirmIcon from "../../assets/confirm-45x45.png"
 import bagIcon from "../../assets/bag-50x50.png"
 import locationIcon from "../../assets/location-45x45.png"
 
-const Button = ({ clicked, iconType, children, buttonType }) => {
+const Button = ({ clicked, iconType, children, buttonType, testid }) => {
 	let icon
 
 	switch (iconType) {
@@ -31,7 +31,11 @@ const Button = ({ clicked, iconType, children, buttonType }) => {
 	}
 
 	return (
-		<StyledButton onClick={clicked || null} type={buttonType || "button"}>
+		<StyledButton
+			onClick={clicked || null}
+			type={buttonType || "button"}
+			data-testid={testid || "button"}
+		>
 			{icon && (
 				<div>
 					<img src={icon} alt={iconType} />

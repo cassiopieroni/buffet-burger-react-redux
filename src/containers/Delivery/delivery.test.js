@@ -1,9 +1,17 @@
 import React from "react"
+import { render, fireEvent, cleanup, waitForElementToBeRemoved } from "../../test-utils"
+import userEvent from "@testing-library/user-event"
+
 import Delivery from "./index"
 import deliveryReducer from "../../store/ducks/delivery"
 import shoppingBagReducer from "../../store/ducks/shoppingBag"
-import { render, fireEvent, cleanup, waitForElementToBeRemoved } from "../../test-utils"
-import userEvent from "@testing-library/user-event"
+
+const mockHistoryPush = jest.fn()
+jest.mock("react-router-dom", () => ({
+	useHistory: () => ({
+		push: mockHistoryPush,
+	}),
+}))
 
 describe("Delivery container ", () => {
 	beforeEach(() => {
@@ -54,7 +62,8 @@ describe("Delivery container ", () => {
 		expect(inputCep).toHaveValue("00000111")
 	})
 
-	it("Os campos de input devem ser preenchidos no evento de 'onBlur' no campo CEP", async () => {
+	it(`Quando houver o evento 'blur' no campo 'CEP', o campo 'Rua' deve receber o 
+	valor da API de endereços (data.logradouro) referente ao valor de CEP`, async () => {
 		fetch.mockResponseOnce(JSON.stringify(fakeFetchedAddress))
 
 		const { getByTestId } = render(<Delivery />, {
@@ -76,5 +85,36 @@ describe("Delivery container ", () => {
 		expect(getByTestId("addressForm-street")).toHaveValue(
 			fakeFetchedAddress.logradouro
 		)
+	})
+
+	it(`Ao submeter o formulário (com todos os campos preenchidos corretamente), 
+	deve encaminhar o usuário para a página seguinte`, async () => {
+		const fakeDeliveryState = {
+			address: {
+				...fakeFetchedAddress,
+				num: "10",
+				clientName: "nome do cliente",
+				cep: "11111000",
+			},
+			isValidCep: true,
+			deliveryFee: 7,
+			loading: false,
+		}
+
+		const { getByTestId } = render(<Delivery />, {
+			reducers: {
+				delivery: deliveryReducer,
+				shoppingBag: shoppingBagReducer,
+			},
+			initialState: {
+				shoppingBag: fakeInitialShoppingBagState,
+				delivery: fakeDeliveryState,
+			},
+		})
+
+		const buttonConfirmAddress = getByTestId("btn-confirmAddress")
+		fireEvent.click(buttonConfirmAddress)
+
+		expect(mockHistoryPush).toHaveBeenCalledTimes(1)
 	})
 })

@@ -1,5 +1,6 @@
 import React, { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom"
 
 import { addMessage } from "../../store/ducks/messages"
 import {
@@ -21,15 +22,16 @@ import Spinner from "../../components/Spinner"
 
 import { StyledSection, StyledForm, StyledDiv, StyledDivLoading } from "./styles"
 
-const Delivery = props => {
+const Delivery = () => {
 	const dispatch = useDispatch()
+	const history = useHistory()
 
 	const { isConfirmedBag, products, bagPrice } = useSelector(state => state.shoppingBag)
 	const { address, isValidCep, deliveryFee, loading } = useSelector(
 		state => state.delivery
 	)
 
-	const { cep } = address
+	const { cep, clientName, num } = address
 
 	const handleOnBlurFetchAddress = useCallback(() => {
 		const regExpCEP = cep.replace(/\D/g, "")
@@ -59,13 +61,18 @@ const Delivery = props => {
 
 	const handleClickSubmit = e => {
 		e.preventDefault()
-
-		if (isValidCep) {
+		const isValidFields = isValidCep && clientName && num
+		if (isValidFields) {
 			const orderData = { products, bagPrice, address, deliveryFee }
 			confirmingDeliveryData(orderData)
-			props.history.push("/order")
+			history.push("/order")
 		} else {
-			dispatch(addMessage({ type: "error", content: "CEP não encontrado!" }))
+			dispatch(
+				addMessage({
+					type: "error",
+					content: "Preencha os campos para prosseguir!",
+				})
+			)
 		}
 	}
 
@@ -97,7 +104,11 @@ const Delivery = props => {
 					</p>
 				</StyledDiv>
 
-				<Button iconType="confirm" buttonType="submit">
+				<Button
+					iconType="confirm"
+					buttonType="submit"
+					testid="btn-confirmAddress"
+				>
 					Confirmar dados de entrega
 				</Button>
 			</StyledForm>
